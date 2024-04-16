@@ -1,8 +1,6 @@
 # HOW TO DESCRIBE ROS NODES USING THE LANGUAGE
 
-
-
-Component models have two types of extensions, either .ros1 for ROS version 1 packages and .ros2 for ROS 2 packages. In both cases the language allows to describea pockage that contains ros nodes and their interfaces.
+Component models have two types of extensions, either .ros1 for ROS version 1 packages and .ros2 for ROS 2 packages. In both cases the language allows to describe package that contains ROS nodes and their interfaces.
 To create a new model, you can easily just create a new file with the correct extension. For example my_node.ros2.
 
 ## ROS (1)
