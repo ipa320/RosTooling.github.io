@@ -46,7 +46,7 @@ The RosTooling divides the ROS concepts into three layers of models:
 
 - Review models and use of textual editor
 - [Create your own model](docu/Example_PubSub.md)
-- Models visualization
+- [System Models visualization](docu/SystemModelsVisualization.md)
 - Code generator review
 - Real use cases execution
 - Hello world example
