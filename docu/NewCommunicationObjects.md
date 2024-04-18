@@ -6,18 +6,18 @@ For the autogeneration of of model objects we facilitate a bash (:bangbang::bang
 
 ```
 source /your_ROS_workspace
-wget https://raw.githubusercontent.com/ipa320/RosCommonObjects/YamlFormat/de.fraunhofer.ipa.ros.communication.objects/basic_msgs/generate_messages_model_helper.sh
+wget https://raw.githubusercontent.com/ipa320/RosCommonObjects/main/de.fraunhofer.ipa.ros.communication.objects/basic_msgs/generate_messages_model_helper.sh
 chmod +x generate_messages_model_helper.sh
 ./generate_messages_model_helper.sh ROS_PACKAGE_NAME > ROS_PACKAGE_NAME.ros
 ```
 
-The file generated, independently of the method, will have a *.ros* extension and can be copied to the folder "basic_msgs" of the "de.fraunhofer.ipa.ros.communication.objects" project, please send us a pull request to our [repository](https://github.com/ipa320/RosCommonObjects.git) with your models to include them to the base dictionary automatically. Alternatively, for cases where the messages types are specific for a concrete component (like the ur_msgs for ur_driver or messages types defined within the same repository that the node). We recommended to follow the same approach that ROS does, define the communication objects models together with the node description, for our tooling that means copy the file to the project that will be created on the next step for your node description.
+The file generated, independently of the method, will have a *.ros* extension and can be copied to the folder "basic_msgs" of the "de.fraunhofer.ipa.ros.communication.objects" project, please send us a pull request to our [repository](https://github.com/ipa320/RosCommonObjects.git) with your models to include them to the base dictionary automatically. Alternatively, for cases where the messages types are specific for a concrete component (like the ur_msgs for ur_driver or messages types defined within the same repository that the node). We recommended following the same approach that ROS does, define the communication object models together with the node description, for our tooling that means copying the file to the project that will be created on the next step for your node description.
 
 ### ROS communication objects model language grammar
 
-To modify the ROS models (.ros) manually the ROS tooling provides a customized editor which should be the default option to open the .ros extension files, otherwise it can be selected manually by a right click on the *MyFile.ros* file and choose *"Open with.."* and *"ROS Editor"*).
+To modify the ROS models (.ros) manually the ROS tooling provides a customized editor which should be the default option to open the .ros extension files, otherwise, it can be selected manually by a right click on the *MyFile.ros* file and choosing _"Open_ with.."* and *"ROS Editor"*).
 
-This editor contains an autocomplete function (by pressing Ctrl+Space) and will report any error made by editing. The first step is define a PackageSet (that correspond to a metapackage for ROS, this definition is optional and its name can be kept empty). Then, the ROS package which contains the msgs have to be defined and within it the option "spec" have to be selected to write down the objects. In the practice that means that the initial *.ros file that describes ROS objects looks:
+This editor contains an autocomplete function (by pressing Ctrl+Space) and will report any error made by editing. The first step is to define a PackageSet (that corresponds to a metapackage for ROS, this definition is optional and its name can be kept empty). Then, the ROS package which contains the msgs has to be defined and within it, the option "spec" has to be selected to write down the objects. In practice that means that the initial *.ros file that describes ROS objects looks:
 
 ```
 ros_package_name:
@@ -27,7 +27,7 @@ ros_package_name:
         type name
 ```
 
-The grammar supports 3 types of communication objects messages, services and actions, and consequentially each of these 3 types support different specifications types:
+The grammar supports 3 types of communication objects messages, services and actions, and consequentially each of these 3 types supports different specifications types:
 
 - ROS msgs
 
@@ -106,7 +106,7 @@ control_msgs:
         float64 pointing_angle_error
 ```
 
-Where , quite similar to ROS, the allowed element types are:
+Where, quite similar to ROS, the allowed element types are:
 
 - Primitives:
   - bool
@@ -124,15 +124,15 @@ Where , quite similar to ROS, the allowed element types are:
   - time
   - Header
 
-- Relative reference to other object:
+- Relative reference to another object:
   - NameOftheObject (if it is described within the same ROS package) -> for example **Point32**
-  - 'ROSPackage_name/NameOftheObject' (if it is described in other ROS package) -> for example **'geometry_msgs/Point32'**
+  - 'ROSPackage_name/NameOftheObject' (if it is described in another ROS package) -> for example **'geometry_msgs/Point32'**
 
 - Arrays of element types:
   - ElementType[] -> for example **string[]** or **Point32[]** or **'geometry_msgs/Point32'[]**
 
 
-Additionally the definition of constants with its value is also supported and follows a patter very similar to the ROS one: ```constanttype1 CONSTANTNAME1=constantvalue1```, for example ```byte OK=0 byte WARN=1 byte ERROR=2 byte STALE=3```.
+Additionally, the definition of constants with their value is also supported and follows a pattern very similar to the ROS one: ```constanttype1 CONSTANTNAME1=constantvalue1```, for example, ```byte OK=0 byte WARN=1 byte ERROR=2 byte STALE=3```.
 
 The following extract shows the ROS model description correspondent to the [nav_msgs](http://wiki.ros.org/nav_msgs) package:
 
@@ -192,7 +192,7 @@ nav_msgs:
       response
         'nav_msgs/msg/OccupancyGrid'[] map
 ```
-:bangbang::bangbang: This model doesn't allow the creation of 2 specification with the same name, although they have different types. That means a ROS model like the following one is not allow:
+:bangbang::bangbang: This model doesn't allow the creation of 2 specifications with the same name, although they have different types. That means a ROS model like the following one is not allowed:
 
 ```
 my_msgs:
@@ -206,6 +206,6 @@ my_msgs:
      response
       String data
 ```
-The reason is that when one of these objects have to be referenced during the definition of a node it will be imposible for the model to distinguish which is the correct one (both are defined as my_msgs/Hello and whitin the dame model file). For these cases we recommend to split the objects into two different model files.
+The reason is that when one of these objects has to be referenced during the definition of a node it will be impossible for the model to distinguish which is the correct one (both are defined as my_msgs/Hello and within the dame model file). For these cases, we recommend splitting the objects into two different model files.
 
 The repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) holds further examples.

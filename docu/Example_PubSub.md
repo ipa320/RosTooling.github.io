@@ -79,7 +79,7 @@ Now that we have already the components we can compose them. For that we have to
 
 In [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you to write the model properly.
 
-The first that must be given is a name and then a ":" is required. In the next line you must add identation and you can press the keys "Ctrl" + Space bar for help. 
+The first that must be given is a name and then a ":" is required. In the next line, you must add identation and you can press the keys "Ctrl" + Space bar for help. 
 Then we will define the nodes that compose the system. Here under "from" we will link our previously created nodes, the grammar for the references is **PackageName.NodeName**.
 
 ![alt text](images/pubsub_tutorial5.gif)
