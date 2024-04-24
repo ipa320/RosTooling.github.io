@@ -38,7 +38,7 @@ The RosTooling divides the ROS concepts into three layers of models:
 
 - [Review models and use of textual editor](docu/LearnRosModels.md)
 - [Create your own model](docu/CreateYourModel.md)
-- Generate code from model description
+- [Generate code from model description](docu/rossdl.md)
 - [Extract models using static code analysis](docu/StaticCodeAnalyis.md)
 - [Extract component models using introspection at runtime](docu/ros2model.md)
 
@@ -51,7 +51,8 @@ The RosTooling divides the ROS concepts into three layers of models:
 - Code generator review
 - Real use cases execution (these tutorials require a local ROS 2 installation):
   - [Turtlesim](docu/Example_Turtlesim.md)
-  - Mobile base on simulation
+  - Beginner - Mobile base on simulation
+  - Advanced - Mobile base on simulation
 
 ### Links and further examples
 
