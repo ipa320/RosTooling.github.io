@@ -17,7 +17,7 @@ The file generated, independently of the method, will have a *.ros* extension an
 
 To modify the ROS models (.ros) manually the ROS tooling provides a customized editor which should be the default option to open the .ros extension files, otherwise, it can be selected manually by a right click on the *MyFile.ros* file and choosing _"Open_ with.."* and *"ROS Editor"*).
 
-This editor contains an autocomplete function (by pressing Ctrl+Space) and will report any error made by editing. The first step is to define a PackageSet (that corresponds to a metapackage for ROS, this definition is optional and its name can be kept empty). Then, the ROS package which contains the msgs has to be defined and within it, the option "spec" has to be selected to write down the objects. In practice that means that the initial *.ros file that describes ROS objects looks:
+This editor contains an autocomplete function (by pressing Ctrl+Space) and will report any error made by editing. The first step is to define a PackageSet (that corresponds to a metapackage for ROS, this definition is optional and its name can be kept empty). Then, the ROS package which contains the msgs has to be defined and within it, the option "spec" has to be selected to write down the objects. In practice, that means that the initial *.ros file that describes ROS objects looks:
 
 ```
 ros_package_name:

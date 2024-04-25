@@ -6,4 +6,4 @@ Before you start editing the models you must be sure that Eclipse is building au
 
 The most common issue is problems in compiling the models because of not-found references.
 
-The .ros2 models have dependencies to .ros, and the .rossystem models to both of them and sometimes these references are defined on a different project that must be compiled in the correct order and sometimes the automatic build can't deal with it. For those cases, you can trigger a new build, for the full Workspace or only for the project with errors. This helps in the majority of the cases. This option is available under "Poroect" -> "Clean..".
+The .ros2 models have dependencies to .ros, and the .rossystem models to both of them and sometimes these references are defined on a different project that must be compiled in the correct order and sometimes the automatic build can't deal with it. For those cases, you can trigger a new build, for the full Workspace or only for the project with errors. This helps in the majority of the cases. This option is available under "Project" -> "Clean..".

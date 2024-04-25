@@ -27,7 +27,7 @@ By default, the RosTooling will automatically generate a PlantUML file descripti
 Alternatively, you can copy the content of the generated file to an online PlantUML editor tool like [PlantText](https://www.planttext.com/).
 
 #### Known Issues
-Unfortunatelly, PlatUML, specifically the template here generated is not supporting large systems. They show cut. Also sometime the generated file has issues because of duplicated ports. we are cosidering the reimplementation of the template.
+Unfortunately, PlatUML, specifically the template here generated is not supporting large systems. They show cut. Also sometimes the generated file has issues because of duplicated ports. We are considering the reimplementation of the template.
 
 ## Sirius visualizer
 

@@ -1,8 +1,8 @@
 # Hands-on example for the Turtlesim node
 
-To learn ROS one of the first tutoials that everyone does is turtlesim.
+To learn ROS one of the first tutorials that everyone does is turtlesim.
 
-Basically it is a small graphical interface where appears a turtle that I can move using the speed commands of any robotic base in ROS. [Official TurtleSim tutorial](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
+Basically, it is a small graphical interface where appears a turtle that I can move using the speed commands of any robotic base in ROS. [Official TurtleSim tutorial](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
 
 We will use it as an example to introduce our models. Let's imagine that we want to create a system in which we have two nodes, one of them is the turtlesim and the other is the node to teleoperate it.
 The first thing we need to do is to create the models for both components. Both nodes are implemented in the [turtlesim](https://github.com/ros/ros_tutorials/tree/humble/turtlesim) package in the [ros_tutorials](https://github.com/ros/ros_tutorials/tree/humble) repository.
@@ -62,18 +62,18 @@ If the button doesn't work you can also create it manually using the Eclipse men
 
 By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty.This can be removed for this case.
 
-Once the project is created, you can create a new file my File -> New -> Other -> File. We recommend to give as name to the file the name of the package and its must have the extension .ros2, this means the new file should be called **turtlesim.ros2**. By creating a file type .ros2, Eclipse will convert the project to a Xtext project. Then copy the previous content to the new file.
+Once the project is created, you can create a new file my File -> New -> Other -> File. We recommend giving as name to the file the name of the package and it must have the extension .ros2, this means the new file should be called **turtlesim.ros2**. By creating a file type .ros2, Eclipse will convert the project to an Xtext project. Then copy the previous content to the new file.
 
-Now that we have already the components we can compose them. For that we have to create a new .rossystem file. Again go to File -> New -> Other -> File. The new file must have as extension .rossystem.
+Now that we have already the components we can compose them. For that, we have to create a new .rossystem file. Again go to File -> New -> Other -> File. The new file must have an extension .rossystem.
 
 In [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you to write the model properly.
 
-The first that must be given is a name and then a ":" is required. In the next line you must add identation and you can press the keys "Ctrl" + Space bar for help. 
+The first that must be given is a name and then a ":" is required. In the next line, you must add indentation and you can press the keys "Ctrl" + Space bar for help. 
 Firstly, we will add the 2 nodes that compose our system.
 
 ![alt text](images/turtlesim_tutorial1.gif)
 
-So far our file looks like:
+So far our file looks like this:
 ```
 turtlesim_system:
   nodes:
@@ -83,7 +83,7 @@ turtlesim_system:
       from: "turtlesim.turtle_teleop_key"
 ```
 
-The from attributes are references to the previous **turtlesim.ros2** file nodes. If you change the name of them, the references must also be updated.
+The "from" attributes are references to the previous **turtlesim.ros2** file nodes. If you change the name of them, the references must also be updated.
 
 Now, we want to expose the ports to be connected. This means the subscriber of the velocity command of the turtle and the publisher from the keyboard teleop:
 
@@ -103,9 +103,9 @@ turtlesim_system:
         - cmd_publisher: pub-> "turtle_teleop_key::cmd_vel"
 ```
 
-Again, the interfaces are references to the ones already defined in the  **turtlesim.ros2** file. In ROS terms, we can only create instantiate topics that are described on my original ROS code (cpp or python).
+Again, the interfaces are references to the ones already defined in the **turtlesim.ros2** file. In ROS terms, we can only create instantiate topics that are described on my original ROS code (cpp or python).
 
-The last step is to create the connection between the two components. 
+The last step is to create a connection between the two components. 
 
 ![alt text](images/turtlesim_tutorial3.gif)
 

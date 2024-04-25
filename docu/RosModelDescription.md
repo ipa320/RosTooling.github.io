@@ -37,10 +37,10 @@ my_awesome_pkg: #Name of the package
 ```
 
 
-The format is based the YAML file format. All the words marked in the template with '**' are keywords that compose the model, they can't be modified. 
+The format is based on YAML. All the words marked in the template with '**' are keywords that compose the model, they can't be modified. 
 
 
-See the following model exmaple for the known teleop ROS package:
+See the following model example for the known teleop ROS package:
 
 ```
 teleop:
@@ -130,9 +130,9 @@ my_awesome_pkg:
             **reliability:** best_effort 
 ```
 
-The only remarkable difference with the ROS 1 model is that the quality of service can be defined for all the interfaces. The quality of service atrributes are optional and they allow the following options:
+The only remarkable difference with the ROS 1 model is that the quality of service can be defined for all the interfaces. The quality of service attributes are optional and they allow the following options:
 
-- depth : it must be an integer.
+- depth: it must be an integer.
 - durability: volatile / transient_local
 - history: keep_all / keep_last
 - profile: default_qos / sensor_qos / services_qos/ parameter_qos
@@ -148,7 +148,7 @@ The type of supported parameters are:
 - Array [Type]
 - Struct [Name Type, Name Type]
 
-For more details about parameters, please check the [site about the paremeters definition](ParametersAPI.md).
+For more details about parameters, please check the [site about the parameters definition](ParametersAPI.md).
 
 See the following example for the [arucos_ros](https://github.com/pal-robotics/aruco_ros) driver:
 
@@ -191,7 +191,7 @@ aruco_ros:
 
 ## Textual model editor
 
-The textual editor contains checker embedded, for example:
+The textual editor contains a checker embedded, for example:
 
 ![alt text](images/RosModelEmbededChecker.gif)
 

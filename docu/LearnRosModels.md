@@ -21,7 +21,7 @@ my_Component:
      node: Test
 ```
 
-This model will report an error and two issues. By moving the mouse to the error icon, the ROS model editor will point out the issue, in this case "The name of a package has to follow the ROS naming conventions: Capital letters are not allowed". The ROS models compiler includes the ROS naming conventions based on the [REP 144](https://ros.org/reps/rep-0144.html), where it is established that a name must "only consist of lowercase alphanumerics and _ separators and start with an alphabetic character."
+This model will report an error and two issues. By moving the mouse to the error icon, the ROS model editor will point out the issue, in this case, "The name of a package has to follow the ROS naming conventions: Capital letters are not allowed". The ROS models compiler includes the ROS naming conventions based on the [REP 144](https://ros.org/reps/rep-0144.html), where it is established that a name must "only consist of lowercase alphanumerics and _ separators and start with an alphabetic character."
 
 ![alt text](images/01_learn_rosmodels.gif )
 
@@ -69,6 +69,6 @@ To solve it, add a new element under my_bool to describe the type. The autocompl
 
 ![alt text](images/04_learn_rosmodels.gif)
 
-Now that you understand how the textual editor and the models validator work, you can check one of the extended examples. The project "de.fraunhofer.ipa.ros.communication.objects" under "BasicSpecs/Components" contains some examples. We strongly recommend taking a look at "ros_component_template.ros2".
+Now that you understand how the textual editor and the model's validator work, you can check one of the extended examples. The project "de.fraunhofer.ipa.ros.communication.objects" under "BasicSpecs/Components" contains some examples. We strongly recommend taking a look at "ros_component_template.ros2".
 
-Also [clone and check the Catalog](Environment_setup.md#3-import-the-catalog) with many real exmaples of ROS components.
+Also, [clone and check the Catalog](Environment_setup.md#3-import-the-catalog) with many real examples of ROS components.

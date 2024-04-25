@@ -13,7 +13,7 @@ The types of parameters supported by the ROS tooling are the following:
 
 and their description is allowed at ROS and ROSSystem model level. 
 
-For the complete definition of parameters the user has to open the ROS model editor, where the language format is the following:
+For the complete definition of parameters, the user has to open the ROS model editor, where the language format is the following:
 ```
 **parameters:**
   ParameterName:
@@ -49,7 +49,7 @@ test_parameters:
           type: Struct [hello Integer, what String]
 ```
 
-These parameters can be re-set at Rossystem level (that means for ROS developers, the case of the set of a new parameter value within a node include on a ROS launch file). For the tooling the format is the following:
+These parameters can be re-set at Rossystem level (that means for ROS developers, the case of the set of a new parameter value within a node included on a ROS launch file). For the tooling, the format is the following:
 
 ```
 - ParameterName : ParameterReferenceInRos2File
@@ -81,5 +81,5 @@ test:
             hello: 1 
             what: "test"]
 ```
-The model definition of parameters is also consider for the autogeneration of launch files.
-Complementarily, and because of the complexity of the format, the .ros, and the .rossystem language validators contain rules to check that the value given to the parameter has the correct type and also help messages that together with the auto-complete function (Ctrl+Space) facilitate to the user the creation of parameters.
+The model definition of parameters is also considered for the autogeneration of launch files.
+Complementarily, and because of the complexity of the format, the .ros, and the .rossystem language validators contain rules to check that the value given to the parameter has the correct type and also help messages that together with the auto-complete function (Ctrl+Space) facilitate the user the creation of parameters.

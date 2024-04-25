@@ -16,7 +16,7 @@ For this example, you can use existing .ros2 files for the composition. Under "d
 
 In [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you to write the model properly.
 
-The first that must be given is a name and then a ":" is required. In the next line, you must add identation and you can press the keys "Ctrl" + Space bar for help. 
+The first that must be given is a name and then a ":" is required. In the next line, you must add indentation and you can press the keys "Ctrl" + Space bar for help. 
 Then we will define the nodes that compose the system. Here under "from" we will link our previously created nodes, the grammar for the references is **PackageName.NodeName**.
 
 ![alt text](images/01_learn_rossystemmodels.gif)
@@ -56,7 +56,7 @@ my_awesome_system:
         - my_sub: sub-> "awesome2::awesome2_sub"
 ```
 
-The next step is to create the connection between the two components. For that, we will use the connections description, under the system description. The connections must be done between interface instances described within the models, otherwise, the model validator will give an error.
+The next step is to create a connection between the two components. For that, we will use the connections description, under the system description. The connections must be made between interface instances described within the models, otherwise, the model validator will give an error.
 
 ![alt text](images/03_learn_rossystemmodels.gif)
 

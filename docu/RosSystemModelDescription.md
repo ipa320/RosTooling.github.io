@@ -46,7 +46,7 @@ Below we analyze each part that makes up the system and how it is formed:
   - interfaces: list of all the interfaces of the node. Here it is not mandatory to list the interfaces (again) as they are already on the .ros2 file. Only the renamed interfaces must be added, as well as, interfaces that will form a connection with other components. A referenced interface is given by: **NewName: Type -> ref_artifact_name::ref_interface_name** where `ref_artifact_name` and `ref_artifact_name` come from the ros2 file. And the Type can be pub, sub, sc, ss, ac, or as.
   - parameters: it is used to pass a value to a parameter. Every parameter shall have a name (my_param) in the example, and the reference to an existing parameter, given by 'artifact_name::param_name' from a .ros2 file. Then under value, a new value can be given to the parameter.
   
-- (Optional) Connections: describe the connections between the nodes. They are given by `[name_of_the_output, name_of_the_input]` the outputs and inputs musst be previously created, they musst have the same communication pattern (topic, service or action) and the same type of communication object (for example std_msgs/String). Otherwise, the validator will give an error.
+- (Optional) Connections: describe the connections between the nodes. They are given by `[name_of_the_output, name_of_the_input]` the outputs and inputs must be previously created, they must have the same communication pattern (topic, service or action) and the same type of communication object (for example std_msgs/String). Otherwise, the validator will give an error.
 
 The Editor of the models contains validators and the auto-complete function, which can be called with the combination of the keys `Ctrl` and space bar.
 

@@ -49,4 +49,4 @@ my_awesome_system:
 
 The code generator for these cases, will not create the launch but update the README file to give instructions about how to install and start the defined file.
 
-It is strongly recommended to give also information about the components and interfaces within the system. This will help on the documentation and taking into consideration for the visualization of the system.
+It is strongly recommended to give also information about the components and interfaces within the system. This will help with the documentation and be taken into consideration for the visualization of the system.

@@ -30,4 +30,4 @@ This command will create automatically under the selected folder (in this case t
 
 You can copy the files to the ROS project in Eclipse to verify the models.
 
-Please note that some information can be wrong as from the runtime system we can not get the filesystem information like the name of package and the name of the artifacts. This information must be reviewed by the user.
+Please note that some information can be wrong as from the runtime system we can not get the filesystem information like the name of the package and the name of the artifacts. This information must be reviewed by the user.

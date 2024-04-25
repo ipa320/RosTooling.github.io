@@ -25,7 +25,7 @@ If you have internet a button can clone from GitHub the objects to your workspac
 
 ### 3: Import the catalog
 
-Also you can download and import a pre-existing catalog of examples. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
+Also, you can download and import a pre-existing catalog of examples. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
 
 Please clone the repository and import it to your Eclipse workspace. This can be easily done by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
 

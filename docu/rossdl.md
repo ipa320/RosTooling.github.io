@@ -31,7 +31,7 @@ rossdl_generate_code(
 
 Where the first argument is the relative path to the .ros2 model file that contains the description of the ROS 2 node.
 
-For the previously shown example the content of the file is:
+For the previously shown example, the content of the file is:
 ```
 basic_template:
   artifacts: 
@@ -42,7 +42,7 @@ basic_template:
          type: "std_msgs/msg/String"
 ```
 
-Apart from that the user must add the dependencies to the required packages to both files, the package.xml and the CMakeLists. For this concrete case, the only extra dependency for the node is "std_msgs". This means the CMakeLists.txt look like:
+Apart from that the user must add the dependencies to the required packages to both files, the package.xml and the CMakeLists. For this concrete case, the only extra dependency for the node is "std_msgs". This means the CMakeLists.txt looks like:
 
 ```
 cmake_minimum_required(VERSION 3.8)
