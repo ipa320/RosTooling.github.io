@@ -34,6 +34,10 @@ The RosTooling divides the ROS concepts into three layers of models:
 
 ### Tutorials
 
+If you get issues during the execution of these tutorials please report them under the following [https://github.com/ipa320/RosTooling.github.io/issues](https://github.com/ipa320/RosTooling.github.io/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=). In case you don't have a GitHub account, please just send an email to nhg@ipa.fhg.de. Many thanks for your help :).
+
+Also, we will be very thankful if once you complete the tutorials you take 15 minutes to fulfill our survey, this will help us to improve our solution.
+
 #### Components
 
 - [Review models and use of textual editor](docu/LearnRosModels.md)
@@ -52,9 +56,11 @@ The RosTooling divides the ROS concepts into three layers of models:
 - Real use cases execution (these tutorials require a local ROS 2 installation):
   - [Turtlesim](docu/Example_Turtlesim.md)
   - [Beginner - Mobile base on simulation](docu/MobileBase_beginner.md)
-  - Advanced - Mobile base on simulation
+  - ~~[Advanced - Manipulation](docu/Manipulation_advanced.md)~~
 
 ### Links and further examples
 
+- [Eclipse known issues](docu/eclipse_issues.md)
+- [RosTooling Known issues](docu/RosTooling_issues.md)
 - [Create your own model from nodes](docu/Example_PubSub.md)
 
