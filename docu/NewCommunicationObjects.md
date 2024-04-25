@@ -192,6 +192,9 @@ nav_msgs:
       response
         'nav_msgs/msg/OccupancyGrid'[] map
 ```
+
+### Known-issues
+
 :bangbang::bangbang: This model doesn't allow the creation of 2 specifications with the same name, although they have different types. That means a ROS model like the following one is not allowed:
 
 ```
@@ -209,3 +212,5 @@ my_msgs:
 The reason is that when one of these objects has to be referenced during the definition of a node it will be impossible for the model to distinguish which is the correct one (both are defined as my_msgs/Hello and within the dame model file). For these cases, we recommend splitting the objects into two different model files.
 
 The repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) holds further examples.
+
+:bangbang::bangbang: The autogenerator script doesn't support actions.

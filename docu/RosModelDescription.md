@@ -1,7 +1,7 @@
 # HOW TO DESCRIBE ROS NODES USING THE LANGUAGE
 
 Component models have two types of extensions, either .ros1 for ROS version 1 packages and .ros2 for ROS 2 packages. In both cases the language allows to describe package that contains ROS nodes and their interfaces.
-To create a new model, you can easily just create a new file with the correct extension. For example my_node.ros2.
+To create a new model, you can easily just create a new file with the correct extension, the RosTooling environment will automatically recognize it and make use of its related features for the textual editor.
 
 ## ROS (1)
 
@@ -130,7 +130,7 @@ my_awesome_pkg:
             **reliability:** best_effort 
 ```
 
-The only remarkable difference with the ROS 1 model is that the quality of service can be defined for all the different interfaces. The quality of service atrributes are optional and they allow the following options:
+The only remarkable difference with the ROS 1 model is that the quality of service can be defined for all the interfaces. The quality of service atrributes are optional and they allow the following options:
 
 - depth : it must be an integer.
 - durability: volatile / transient_local
@@ -148,7 +148,7 @@ The type of supported parameters are:
 - Array [Type]
 - Struct [Name Type, Name Type]
 
-For more details please check the following [examples](ParametersAPI.md).
+For more details about parameters, please check the [site about the paremeters definition](ParametersAPI.md).
 
 See the following example for the [arucos_ros](https://github.com/pal-robotics/aruco_ros) driver:
 
@@ -198,3 +198,5 @@ The textual editor contains checker embedded, for example:
 It incorporates also the auto-complete function. This is available by pressing **Ctrl** + the space bar:
 
 ![alt text](images/RosModelAutocomplete.gif)
+
+In the [tutorials](LearnRosModels.md) you will be guided to try all of these features.

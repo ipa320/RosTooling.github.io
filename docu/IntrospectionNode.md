@@ -27,3 +27,5 @@ ros2 model running_node [-o Outputfile] <node-name>
 ```
 
 For further information please check the [ros2model](https://github.com/ipa-cmh/ros2model) repository.
+
+The models you will see during the rest of the tutorials were auto-generated mostly using this method.

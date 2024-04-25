@@ -81,5 +81,5 @@ test:
             hello: 1 
             what: "test"]
 ```
-The model definition of parameters is also consider for the autogeneration of launch files and the component interfaces. Complementarily, and because of the complexity of the format, the .ros, the .componentinterface and the .rossystem language validators contain rules to check that the value given to the parameter has the correct type and also help messages that together with the auto-complete function (Ctrl+Space) facilitate to the user the creation of parameters.
-
+The model definition of parameters is also consider for the autogeneration of launch files.
+Complementarily, and because of the complexity of the format, the .ros, and the .rossystem language validators contain rules to check that the value given to the parameter has the correct type and also help messages that together with the auto-complete function (Ctrl+Space) facilitate to the user the creation of parameters.

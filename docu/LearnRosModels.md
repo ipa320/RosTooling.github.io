@@ -70,3 +70,5 @@ To solve it, add a new element under my_bool to describe the type. The autocompl
 ![alt text](images/04_learn_rosmodels.gif)
 
 Now that you understand how the textual editor and the models validator work, you can check one of the extended examples. The project "de.fraunhofer.ipa.ros.communication.objects" under "BasicSpecs/Components" contains some examples. We strongly recommend taking a look at "ros_component_template.ros2".
+
+Also [clone and check the Catalog](Environment_setup.md#3-import-the-catalog) with many real exmaples of ROS components.

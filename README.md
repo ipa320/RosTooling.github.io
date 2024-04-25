@@ -52,7 +52,7 @@ Also, we will be very thankful if once you complete the tutorials you take 15 mi
 - [Other ways to define a system](docu/LearnRosSystemModels2.md)
 <!-- - [Create your own model from nodes](docu/Example_PubSub.md) -->
 - [System Models visualization](docu/SystemModelsVisualization.md)
-- Code generator review
+- [Code generator review](docu/CodeGeneration.md)
 - Real use cases execution (these tutorials require a local ROS 2 installation):
   - [Turtlesim](docu/Example_Turtlesim.md)
   - [Beginner - Mobile base on simulation](docu/MobileBase_beginner.md)

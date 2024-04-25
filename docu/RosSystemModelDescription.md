@@ -49,3 +49,6 @@ Below we analyze each part that makes up the system and how it is formed:
 - (Optional) Connections: describe the connections between the nodes. They are given by `[name_of_the_output, name_of_the_input]` the outputs and inputs musst be previously created, they musst have the same communication pattern (topic, service or action) and the same type of communication object (for example std_msgs/String). Otherwise, the validator will give an error.
 
 The Editor of the models contains validators and the auto-complete function, which can be called with the combination of the keys `Ctrl` and space bar.
+
+
+In the [tutorials](LearnRosSystemModels.md) you will be guided to try all of these features.
