@@ -34,9 +34,13 @@ The RosTooling divides the ROS concepts into three layers of models:
 
 ### Tutorials
 
-If you get issues during the execution of these tutorials please report them under the following [https://github.com/ipa320/RosTooling.github.io/issues](https://github.com/ipa320/RosTooling.github.io/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=). In case you don't have a GitHub account, please just send an email to nhg@ipa.fhg.de. Many thanks for your help :).
+If you get issues during the execution of these tutorials please report them under the following [https://github.com/ipa320/RosTooling.github.io/issues](https://github.com/ipa320/RosTooling.github.io/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=). In case you don't have a GitHub account, please just send an email to nhg@ipa.fhg.de. 
 
-Also, we will be very thankful if once you complete the tutorials you take 15 minutes to fulfill our survey, this will help us to improve our solution.
+Also, we will be very thankful if once you complete the tutorials you take 15 minutes to fulfill our survey, this will help us to improve our solution: [Survey link](https://forms.office.com/e/2V5pPwcY7V). 
+
+Many thanks for your help :)
+
+In case you have already installed the RosTooling, we recommend to pull always the latest version, go to "Help"->"Check for Updates", in case a new version is available it will be proposed to be updated.
 
 #### Components
 
@@ -58,9 +62,8 @@ Also, we will be very thankful if once you complete the tutorials you take 15 mi
   - [Beginner - Mobile base on simulation](docu/MobileBase_beginner.md)
   - ~~[Advanced - Manipulation](docu/Manipulation_advanced.md)~~
 
-### Links and further examples
+### Extra material
 
 - [Eclipse known issues](docu/eclipse_issues.md)
 - [RosTooling Known issues](docu/RosTooling_issues.md)
 - [Create your own model from nodes](docu/Example_PubSub.md)
-
