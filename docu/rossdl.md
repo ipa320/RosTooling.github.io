@@ -19,7 +19,7 @@ source install/setup.bash
 ## Code template [![](images/Ros2_logo.png)]
 
 
-The rossdl repository contains a template example. It is available under **rossdl/rossdl_tests/basic_template**. For testing purposes, you can directly use this package, or copy and rename the folder and modify it.
+The rossdl repository contains some examples. The use of the rossdl package starts by creating a clean ROS package that contains a ros2 description model. Let's use the basic template available on [GitHub](https://github.com/ipa-nhg/rossdl/tree/BasicExampleNHG/rossdl_tests/basic_template).
 
 The template is a common ROS package where the CMakeLists includes the generator command to be executed while building the package.
 
@@ -34,22 +34,29 @@ rossdl_generate_code(
 
 Where the first argument is the relative path to the .ros2 model file that contains the description of the ROS 2 node.
 
-For the previously shown example, the content of the file is:
+Imagine we have the description of an image filter node, which model looks like this:
 ```
 basic_template:
   artifacts: 
-    component:
-     node: test
+    image_filter:
+     node: image_filter
      publishers:
-       string_pub:
+       image_out:
+         type: "sensor_msgs/msg/Image"
+       description_out:
          type: "std_msgs/msg/String"
+     subscribers:
+       image_in:
+         type: "sensor_msgs/msg/Image"
+       laser_in:
+         type: "sensor_msgs/msg/LaserScan"
 ```
 
-Apart from that the user must add the dependencies to the required packages to both files, the package.xml and the CMakeLists. For this concrete case, the only extra dependency for the node is "std_msgs". This means the CMakeLists.txt looks like:
+Apart from that the user must add the dependencies to the required packages to both files, the package.xml and the CMakeLists. For this concrete case, the only extra dependencies for the node are "std_msgs" and "sensor_msgs". This means the CMakeLists.txt looks like:
 
 ```
 cmake_minimum_required(VERSION 3.8)
-project(**PackageName**)
+project(basic_template)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -61,14 +68,17 @@ find_package(rossdl_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(backward_ros REQUIRED)
+# Add here further dependencies
 find_package(std_msgs REQUIRED)
-
+find_package(sensor_msgs REQUIRED)
 
 set(dependencies
   rclcpp
   rclcpp_components
   backward_ros
+  # Add here further dependencies
   std_msgs
+  sensor_msgs
 )
 
 rossdl_generate_code(
@@ -84,10 +94,11 @@ While the package.xml contains the following text:
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>**PackageName**</name>
+  <name>basic_template</name>
   <version>0.0.0</version>
-  <description>**My awesome package description**</description>
-  <maintainer email=**Maintainer email**>**Maintainer name**</maintainer>
+  <description>This is a basic template for rossdl</description>
+  <maintainer email="fmrico@gmail.com">fmrico</maintainer>
+  <maintainer email="nadia.hammoudeh.garcia@ipa.fraunhofer.de">nhg</maintainer>
   <license>Apache 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -98,6 +109,7 @@ While the package.xml contains the following text:
   <depend>backward_ros</depend>
   <!--Add here further dependecies-->
   <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
@@ -113,7 +125,7 @@ By having this package structure and the ros2 file completed, you can easily com
 colcon build --symlink-install --packages-select rossdl_cmake basic_template
 ```
 
-As result, automatically, in the build folder of your workspace, it will appear the code corresponding headers for the new node. In this case in **build/basic_template/ilnclude/basic_template**. For this basic example, the code will contain:
+As result, automatically, in the build folder of your workspace, it will appear the code corresponding headers for the new node. In this case in **build/basic_template/include/basic_template**. For this basic example, the code will contain:
 
 ```
 // generated from rossdl_cmake/resource/nodes.hpp.em
@@ -126,21 +138,28 @@ As result, automatically, in the build folder of your workspace, it will appear 
 #include <optional>
 #include <typeinfo>
 
+#include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "sensor_msgs/msg/image.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
 namespace basic_template
 {
 
-class ComponentBase : public rclcpp::Node
+class ImageFilterBase : public rclcpp::Node
 {
 public:
-  explicit ComponentBase(const rclcpp::NodeOptions & options);
+  explicit ImageFilterBase(const rclcpp::NodeOptions & options);
 
 protected:
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr string_pub_;
+  rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_out_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr description_out_;
+  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_in_;
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_in_;
 
+  virtual void image_in_callback(sensor_msgs::msg::Image::SharedPtr msg) = 0;
+  virtual void laser_in_callback(sensor_msgs::msg::LaserScan::SharedPtr msg) = 0;
 
   template<typename T>
   typename rclcpp::Publisher<T>::SharedPtr
@@ -163,8 +182,11 @@ protected:
   typename rclcpp::PublisherBase::SharedPtr
   get_publisher_base(const std::string & id)
   {
-    if (id == "string_pub") {
-        return string_pub_;
+    if (id == "image_out") {
+        return image_out_;
+    } 
+    if (id == "description_out") {
+        return description_out_;
     } 
     RCLCPP_ERROR(get_logger(), "Publisher [%s] not found", id.c_str());
     return nullptr;
@@ -173,6 +195,12 @@ protected:
   typename rclcpp::SubscriptionBase::SharedPtr
   get_subscription_base(const std::string & id)
   {
+    if (id == "image_in") {
+        return image_in_;
+    } 
+    if (id == "laser_in") {
+        return laser_in_;
+    } 
     RCLCPP_ERROR(get_logger(), "Subscriber [%s] not found", id.c_str());
     return nullptr;
   }
@@ -181,6 +209,10 @@ protected:
 
 }  // namespace basic_template
 
+#endif  // BASIC_TEMPLATE__NODES_HPP_
+
 ```
 
-This is a base class whose classes can be used as interfaces to create your node under "ros2/ws/src/rossdl/basic_template/src". This method apart of saving effort by auto-generating code, drive the developer to create a code that correspond to the model representation.
+This is a base class that can be used as interface to create your node under "ros2/ws/src/rossdl/basic_template/src". This method apart from saving effort by auto-generating code, drives the developer to create a code that corresponds to the model representation.
+
+An implementation of a Cpp package using this class is publicly available under [rossdl_tests/rossdl_simple_test/src/rossdl_simple_test/ImageFilter.cpp](https://github.com/CoreSenseEU/rossdl/blob/main/rossdl_tests/rossdl_simple_test/src/rossdl_simple_test/ImageFilter.cpp#L26).
