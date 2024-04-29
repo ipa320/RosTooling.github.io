@@ -2,7 +2,7 @@
 
 ### Option 1: Using the Release version (Recommended)
 
-First, the Java environment has to be set:
+First, the Java environment has to be set. For Linux it can be installed with the following command:
 
 ```
 sudo apt-get install openjdk-19-jre

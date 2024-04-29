@@ -1,10 +1,10 @@
-# Hands-on example for the Turtlesim node
+## Hands-on example for the Turtlesim node [![](images/Ros2_logo.png)]
 
 To learn ROS one of the first tutorials that everyone does is turtlesim.
 
-Basically, it is a small graphical interface where appears a turtle that I can move using the speed commands of any robotic base in ROS. [Official TurtleSim tutorial](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
+Basically, it is a small graphical interface where a turtle can be moved using the speed commands of any robotic base in ROS. [Official TurtleSim tutorial](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
 
-We will use it as an example to introduce our models. Let's imagine that we want to create a system in which we have two nodes, one of them is the turtlesim and the other is the node to teleoperate it.
+We will use it as an example to show the models. Let's imagine that we want to create a system in which we have two nodes, one of them is the turtlesim and the other is the node to teleoperate it.
 The first thing we need to do is to create the models for both components. Both nodes are implemented in the [turtlesim](https://github.com/ros/ros_tutorials/tree/humble/turtlesim) package in the [ros_tutorials](https://github.com/ros/ros_tutorials/tree/humble) repository.
 
 We can create the component models manually or use our static code [analysis tools](https://github.com/ipa320/ros-model-extractors) to get them automatically. Using the second method we obtained the following models.
@@ -60,9 +60,9 @@ If the button doesn't work you can also create it manually using the Eclipse men
 
 ![alt text](images/first_project_tutorial.gif)
 
-By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty.This can be removed for this case.
+By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty. This can be removed for this case.
 
-Once the project is created, you can create a new file my File -> New -> Other -> File. We recommend giving as name to the file the name of the package and it must have the extension .ros2, this means the new file should be called **turtlesim.ros2**. By creating a file type .ros2, Eclipse will convert the project to an Xtext project. Then copy the previous content to the new file.
+Once the project is created, you can create a new file my File -> New -> Other -> File. We recommend giving as name to the file the name of the package and it must have the extension .ros2, this means the new file should be called **turtlesim.ros2**. By creating a file type .ros2, Eclipse will convert the project to an Xtext project. Then copy the previous model content to the new file.
 
 Now that we have already the components we can compose them. For that, we have to create a new .rossystem file. Again go to File -> New -> Other -> File. The new file must have an extension .rossystem.
 
@@ -125,7 +125,7 @@ turtlesim_system:
    -[ cmd_publisher , cmd_subscriber]
 ```
 
-If you save (Ctrl+S) after the last modifications a new folder "src-gen" will be automatically created. This folder contains a ROS2 package ready to be executed with a launch file to start the designed system.
+If you save (Ctrl+S) after the last modifications a new folder "src-gen" will be automatically created. This folder contains a ROS 2 package ready to be executed with a launch file to start the designed system.
 
 For a quick check, if you source a valid ROS installation and call the launch command the turtlesim example will be launched:
 

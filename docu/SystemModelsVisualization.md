@@ -19,15 +19,20 @@ To open the visualizer in Eclipse you can easily go to "Window"->  "Show view" -
 
 
 ### Open the PlantUML auto-generated description
-By default, the RosTooling will automatically generate a PlantUML file description of every valid RosSystem model. It will be held in the src-gen folder of the corresponding ROS package in the folder "resources". The file extension is .puml. By opening it with a text editor and having the PlantUML visualizer open the diagram will appear.
+
+For this example we will use a template model available under the default project "de.fraunhofer.ipa.ros.communication.objects". See instructions under [setup](Environment_setup.md). If the automatic clone doesn't work for you, please clone the repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) manually and import it to your Eclipse workspace.
+
+The example we will show is under "BasicSpecs/Systems/ros_system_template.rossystem".
+
+By default, the RosTooling will automatically generate a PlantUML file description of every valid RosSystem model. It will be held in the "src-gen" folder of the corresponding ROS package. The folder "resources" contains a file with the .puml extension. By opening it with a text editor and having the PlantUML visualizer open the diagram will appear.
 
 ![alt text](images/PlantUMLViewSystemExample.png)
 
 
 Alternatively, you can copy the content of the generated file to an online PlantUML editor tool like [PlantText](https://www.planttext.com/).
 
-#### Known Issues
-Unfortunately, PlatUML, specifically the template here generated is not supporting large systems. They show cut. Also sometimes the generated file has issues because of duplicated ports. We are considering the reimplementation of the template.
+#### Known Issues 
+![](images/Attention.png) Unfortunately, PlantUML, specifically the template here generated is not supporting large systems. They show cut. Also sometimes the generated file has issues because of duplicated ports. We are considering the reimplementation of the template.
 
 ## Sirius visualizer
 
@@ -41,11 +46,15 @@ Once the installation is completed, Eclipse must be restarted.
 
 ### Create a representation view of your system
 
+For this example we will use a template model available under the default project "de.fraunhofer.ipa.ros.communication.objects". See instructions under [setup](Environment_setup.md). If the automatic clone doesn't work for you, please clone the repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) manually and import it to your Eclipse workspace.
+
+The example we will show is under "BasicSpecs/Systems/ros_system_template.rossystem".
+
 A representation file is a file in which Sirius stores all information related to which representations you created, what appears on them, the positions and colors of the elements, etc. These files have a .aird extension (typically representations.aird). Representation files reference the semantic model(s) for which they contain representations, but your semantic models themselves are kept unaware (and unpolluted) of any Sirius-specific data.
 
 To create this file you can go to File -> New -> Other and then navigate or search for "Representations File".
 
-We recommend selecting the initialization method "Initialization from a semantic resource" and using the helper to navigate and select the .rossystem file you would like to open.
+We recommend selecting the initialization method "Initialization from a semantic resource" and using the helper to navigate and select the .rossystem file you would like to open, for example "ros_system_template.rossystem".
 
 ![alt text](images/SiriusCreateRepresentationFile.gif)
 

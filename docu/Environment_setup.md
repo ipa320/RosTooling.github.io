@@ -1,4 +1,4 @@
-# Setup the environment and start the eclipse application
+# Setup the environment and start the Eclipse application
 
 <!-- ### 0: Start the ROS tooling application
 
@@ -8,11 +8,11 @@ select de.fraunhofer.ipa.ros.plugin and press the button *Run*
 
 ![alt text](images/run_ros_tooling.png) -->
 
-### 1: Switch to the ROS Developer perspective
+### Switch to the ROS Developer perspective
 
 Go to Menu Window -> Perspective -> Open Perspective -> Other... -> ROS developer. Your application toolbar will be automatically configured.
 
-### 2: Import the common communication objects project
+### Import the common communication objects project
 
 import the project located under the "ROSCommonObjects" folder of this repository to the workbench of your application:
 ```
@@ -23,7 +23,9 @@ If you have internet a button can clone from GitHub the objects to your workspac
 
 ![alt text](images/clone_and_import.png)
 
-### 3: Import the catalog
+![](images/Attention.png) This button will only work on Linux machines. Alternatively, you can clone manually the [repository](https://github.com/ipa320/RosCommonObjects) and import the project by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
+
+### Import the catalog
 
 Also, you can download and import a pre-existing catalog of examples. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
 

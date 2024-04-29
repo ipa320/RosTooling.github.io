@@ -63,7 +63,7 @@ my_component:
        my_bool:
 ```
 
-In this case the helper will say "The required feature 'type' of 'ros.impl.ParameterImpl@37c1c0b8{platform:/resource/my_first_project/rosnodes/my_first_project.ros2#//@artifact.0/@node/@parameter.0}' must be set". 
+In this case, the helper will say "The required feature 'type' of 'ros.impl.ParameterImpl@37c1c0b8{platform:/resource/my_first_project/rosnodes/my_first_project.ros2#//@artifact.0/@node/@parameter.0}' must be set". 
 
 To solve it, add a new element under my_bool to describe the type. The autocomplete function (Ctrl + Space bar) can help you to use the correct grammar.
 
@@ -71,4 +71,4 @@ To solve it, add a new element under my_bool to describe the type. The autocompl
 
 Now that you understand how the textual editor and the model's validator work, you can check one of the extended examples. The project "de.fraunhofer.ipa.ros.communication.objects" under "BasicSpecs/Components" contains some examples. We strongly recommend taking a look at "ros_component_template.ros2".
 
-Also, [clone and check the Catalog](Environment_setup.md#3-import-the-catalog) with many real examples of ROS components.
+Also, [clone and check the Catalog](Environment_setup.md#3-import-the-catalog) with many real examples of ROS 2 components.

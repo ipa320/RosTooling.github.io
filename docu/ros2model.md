@@ -1,4 +1,4 @@
-# Extract component models using introspection at runtime
+# Extract component models using introspection at runtime [![](images/Ros2_logo.png)]
 
 This tutorial requires a local ROS installation.
 
@@ -27,7 +27,8 @@ ros2 model node -o turtlesim/nodes
 ```
 This command will create automatically under the selected folder (in this case turtlesim/nodes) the .ros2 files corresponding to all the running nodes. 
 
-
 You can copy the files to the ROS project in Eclipse to verify the models.
 
 Please note that some information can be wrong as from the runtime system we can not get the filesystem information like the name of the package and the name of the artifacts. This information must be reviewed by the user.
+
+Many of the models you will see during the rest of the tutorials were auto-generated using this method.

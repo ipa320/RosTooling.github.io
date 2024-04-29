@@ -2,7 +2,7 @@
 
 To complete this tutorial the project "de.fraunhofer.ipa.ros.communication.objects" must be imported. See instructions under [setup](Environment_setup.md). If the automatic clone doesn't work for you, please clone the repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) manually and import it to your Eclipse workspace.
 
-The first step is to create a new Project to contain the examples, in case you completed the previous [tutorials](LearnRosModels.md) you can just use the same package. This can be done by pressing the icon "Add new ROS Project".
+The first step is to create a new Project to contain the examples, in case you completed the previous [tutorials](LearnRosModels.md) you can just use the same package. Otherwise, as usual you can create a new project by pressing the icon "Add new ROS Project".
 
 ![alt text](images/create_new_RosProject.png)
 
@@ -12,12 +12,14 @@ If the button doesn't work you can also create it manually using the Eclipse men
 
 By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty. The folder "rosnodes" can be removed for this example.
 
-For this example, you can use existing .ros2 files for the composition. Under "de.fraunhofer.ipa.ros.communication.objects/BasicSpecs/Components" you can find the **ros_component_template.ros2** and the **ros_component2_template.ros2** files. Both represent fictitious nodes with all the possible interfaces and parameters. Please open both files and review the 
+As a system creation requires component models, you can use existing .ros2 files for the composition. Under "de.fraunhofer.ipa.ros.communication.objects/BasicSpecs/Components" you can find the **ros_component_template.ros2** and the **ros_component2_template.ros2** files. Both represent fictitious nodes with all the possible interfaces and parameters. Please open both files and take a look at them. 
 
-In [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you to write the model properly.
+Now we have to create a file to contain our system model. For that, you can go to File -> New -> Other -> General -> File. The new file must have the extension .rossystem.
+
+As reference, in [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you in writing the model properly.
 
 The first that must be given is a name and then a ":" is required. In the next line, you must add indentation and you can press the keys "Ctrl" + Space bar for help. 
-Then we will define the nodes that compose the system. Here under "from" we will link our previously created nodes, the grammar for the references is **PackageName.NodeName**.
+Then we will define the nodes that compose the system. Here under "from" we will link the previous referenced nodes, the grammar for the references is **PackageName.NodeName**.
 
 ![alt text](images/01_learn_rossystemmodels.gif)
 
@@ -33,13 +35,13 @@ my_awesome_system:
       from: "my_awesome2_pkg.awesome2_node"
 ```
 
-This model is basically creating a system composed of two nodes. While saving the model automatically a folder "src-gen" will be created. The folder contains a new ROS package whose structure corresponds to a launch file. 
+This model is basically creating a system composed of two nodes. While saving the model automatically a folder "src-gen" will be created. The folder contains a new ROS package whose structure corresponds to a python launch package. 
 
 ![alt text](images/launchstructure_01.png)
 
-The CMakeLists and package.xml list the required dependencies and tags to compile the package and the launch file starts both nodes. See the [Code generator review tutorial](docu/.....md) for further details.
+The CMakeLists.txt and package.xml list the required dependencies and tags to compile the package. Then under launch the python file starts both nodes. See the [Code generator review tutorial](docu/CodeGeneration.md) for further details.
 
-Now, we want to expose the ports to be connected. For that, we have to define the interfaces under the nodes. And again we have to reference the created interfaces, with the grammar **NodeName::InterfaceName**. Although in ROS all the interfaces will be automatically exposed, the Rossystem model requires this step to clearly design the system and the ports that are intentionally opened by the architect of the system.
+Now, we want to expose the ports to be connected. For that, we have to define the interfaces under the nodes. And again we have to reference the created interfaces, with the grammar **NodeName::InterfaceName**. Although in ROS all the interfaces will be automatically exposed, the RosSystem model requires this step to clearly design the system and the ports that are intentionally opened by the architect of the system.
 
 ![alt text](images/02_learn_rossystemmodels.gif)
 
@@ -56,7 +58,7 @@ my_awesome_system:
         - my_sub: sub-> "awesome2::awesome2_sub"
 ```
 
-The next step is to create a connection between the two components. For that, we will use the connections description, under the system description. The connections must be made between interface instances described within the models, otherwise, the model validator will give an error.
+The next step is to create a connection between the two components. For that, we will use the connections attribute, under the system description. The connections must be made between interface instances described within the models, otherwise, the model validator will give an error.
 
 ![alt text](images/03_learn_rossystemmodels.gif)
 
@@ -148,6 +150,7 @@ my_awesome_system:
 ```
 
 The compiler will give an error of mismatched type. 
+![](images/Attention.png) The validator has some parts not fully implemented, check the [Known issues](RosTooling_issues.md) site in case you have problems by following this tutorial.
 
 Another feature included as part of the code generator is the generator of parameter files. This will be automatically done by the set of more than 5 parameters, for example for this example:
 

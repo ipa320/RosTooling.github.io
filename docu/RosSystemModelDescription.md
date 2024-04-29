@@ -34,7 +34,7 @@ my_awesome_system:
 
 Below we analyze each part that makes up the system and how it is formed:
 
-- (Optional) Processes: describes all system processes. Each process is determined by a name (process1 in the example), a set of nodes given as a list and the number of threads. The nodes must be defined within the system nodes (in the example they are lines 7 and 14).
+- (Optional) Processes: describes all system processes. Each process is determined by a name (process1 in the example), a set of nodes given as a list and the number of threads. The nodes must be defined within the system nodes.
 
 - (Optional) fromFile: this attribute can be used for those systems that already have a launch file where all the nodes are composed. It expects a string with the name of the package followed by the relative path to the launch file.
 

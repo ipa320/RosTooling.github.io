@@ -1,8 +1,8 @@
-# Generate code from model description
+# Generate code from model description [![](images/Ros2_logo.png)]
 
 This tutorial requires a local ROS 2 installation and some experience with ROS 2. It is based on the package [rossdl](https://github.com/CoreSenseEU/rossdl).
 
-## Installation
+## Installation [![](images/Ros2_logo.png)]
 
 Firstly, you have to create your ROS2 workspace, clone and compile the rossdl package:
 
@@ -15,6 +15,9 @@ rosdep install --from-path src/ -i -y
 colcon build
 source install/setup.bash
 ```
+
+## Code template [![](images/Ros2_logo.png)]
+
 
 The rossdl repository contains a template example. It is available under **rossdl/rossdl_tests/basic_template**. For testing purposes, you can directly use this package, or copy and rename the folder and modify it.
 
@@ -110,32 +113,74 @@ By having this package structure and the ros2 file completed, you can easily com
 colcon build --symlink-install --packages-select rossdl_cmake basic_template
 ```
 
-As result, automatically, in the build folder of your workspace, it will appear the code corresponding to the node, in this case in **build/basic_template/src/basic_template**. For this basic example, the code will contain:
+As result, automatically, in the build folder of your workspace, it will appear the code corresponding headers for the new node. In this case in **build/basic_template/ilnclude/basic_template**. For this basic example, the code will contain:
 
 ```
 // generated from rossdl_cmake/resource/nodes.hpp.em
 // generated code does not contain a copyright notice
 
+#ifndef BASIC_TEMPLATE__NODES_HPP_
+#define BASIC_TEMPLATE__NODES_HPP_
+
+#include <string>
+#include <optional>
+#include <typeinfo>
 
 #include "std_msgs/msg/string.hpp"
-
-#include "basic_template/Nodes.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
 namespace basic_template
 {
 
-using std::placeholders::_1;
-
-ComponentBase::ComponentBase(const rclcpp::NodeOptions & options)
-: Node("component", options)
+class ComponentBase : public rclcpp::Node
 {
-  string_pub_ = create_publisher<std_msgs::msg::String>(
-    std::string(get_fully_qualified_name()) + "/string_pub",
-    100);
+public:
+  explicit ComponentBase(const rclcpp::NodeOptions & options);
+
+protected:
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr string_pub_;
+
+
+  template<typename T>
+  typename rclcpp::Publisher<T>::SharedPtr
+  get_publisher(const std::string & id)
+  {
+    auto ret_pub = std::dynamic_pointer_cast<typename rclcpp::Publisher<T>>(
+      get_publisher_base(id));
+    return ret_pub;
+  }
+
+  template<typename T>
+  typename rclcpp::Subscription<T>::SharedPtr
+  get_subscription(const std::string & id)
+  {
+    auto ret_sub = std::dynamic_pointer_cast<typename rclcpp::Subscription<T>>(
+      get_subscription_base(id));
+    return ret_sub;
+  }
+
+  typename rclcpp::PublisherBase::SharedPtr
+  get_publisher_base(const std::string & id)
+  {
+    if (id == "string_pub") {
+        return string_pub_;
+    } 
+    RCLCPP_ERROR(get_logger(), "Publisher [%s] not found", id.c_str());
+    return nullptr;
+  }
+
+  typename rclcpp::SubscriptionBase::SharedPtr
+  get_subscription_base(const std::string & id)
+  {
+    RCLCPP_ERROR(get_logger(), "Subscriber [%s] not found", id.c_str());
+    return nullptr;
+  }
 };
+
 
 }  // namespace basic_template
 
 ```
+
+This is a base class whose classes can be used as interfaces to create your node under "ros2/ws/src/rossdl/basic_template/src". This method apart of saving effort by auto-generating code, drive the developer to create a code that correspond to the model representation.

@@ -1,8 +1,9 @@
 # Messages, services and actions generator
 
-### Autogeneration tools
+###  Autogeneration tools  [![](images/Ros2_logo.png)]
 
-For the autogeneration of of model objects we facilitate a bash (:bangbang::bangbang: this method requires a local ROS installation):
+
+For the autogeneration of model objects we facilitate a bash:
 
 ```
 source /your_ROS_workspace
@@ -12,6 +13,8 @@ chmod +x generate_messages_model_helper.sh
 ```
 
 The file generated, independently of the method, will have a *.ros* extension and can be copied to the folder "basic_msgs" of the "de.fraunhofer.ipa.ros.communication.objects" project, please send us a pull request to our [repository](https://github.com/ipa320/RosCommonObjects.git) with your models to include them to the base dictionary automatically. Alternatively, for cases where the messages types are specific for a concrete component (like the ur_msgs for ur_driver or messages types defined within the same repository that the node). We recommended following the same approach that ROS does, define the communication object models together with the node description, for our tooling that means copying the file to the project that will be created on the next step for your node description.
+
+![](images/Attention.png) The autogenerator script doesn't support actions.
 
 ### ROS communication objects model language grammar
 
@@ -195,7 +198,7 @@ nav_msgs:
 
 ### Known-issues
 
-:bangbang::bangbang: This model doesn't allow the creation of 2 specifications with the same name, although they have different types. That means a ROS model like the following one is not allowed:
+![](images/Attention.png) This model doesn't allow the creation of 2 specifications with the same name, although they have different types. That means a ROS model like the following one is not allowed:
 
 ```
 my_msgs:
@@ -212,5 +215,3 @@ my_msgs:
 The reason is that when one of these objects has to be referenced during the definition of a node it will be impossible for the model to distinguish which is the correct one (both are defined as my_msgs/Hello and within the dame model file). For these cases, we recommend splitting the objects into two different model files.
 
 The repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) holds further examples.
-
-:bangbang::bangbang: The autogenerator script doesn't support actions.

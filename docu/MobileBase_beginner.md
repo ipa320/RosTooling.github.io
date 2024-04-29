@@ -1,16 +1,16 @@
-# Hands-on example using common ROS systems (beginner)
+## Hands-on example using common ROS systems (beginner) [![](images/Ros2_logo.png)]
 
 The execution part of this tutorial will only work for people with a local ROS 2 installation.
 
-In this tutorial, we are going to see how you can compose existing systems between them or add a new component to them. For this, we will use the turtlebot in simulation.
+In this tutorial, we are going to see how you can compose existing systems or add a new component to them. For this, we will use the turtlebot in simulation.
 
-First of all, we need the turtlebot model, this an other models are available in our catalog of components and subsystems. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
+First of all, we need the turtlebot model, this and other models are available in our catalog of components and subsystems. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
 
 Please clone the repository and import it to your Eclipse workspace. This can be easily done by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
 
 ![alt text](images/01_mobile_base_b.gif)
 
-For this tutorial, we will use the gazebo subsystem. The model is available under **RosModelsCatalog/robots/turtlebot3/simulation/turtlebot_gazebo.rossystem**. This model summarizes the accumulation of nodes that are started in recursive including through the [launch file of the turtlebot_gazebo package](https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/master/turtlebot3_gazebo/launch/turtlebot3_world.launch).
+For this tutorial, we will use the gazebo subsystem. The model is available under **RosModelsCatalog/robots/turtlebot3/simulation/turtlebot_gazebo.rossystem**. This model summarizes the set of nodes that are started in recursive including through the [launch file of the turtlebot_gazebo package](https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/master/turtlebot3_gazebo/launch/turtlebot3_world.launch).
 
 The proposed model looks like this:
 
@@ -52,18 +52,18 @@ turtlebot_gazebo:
         - scan: pub-> "turtlebot3_laserscan::scan"
 ```
 
-Where the "fromFile" attribute points to the launch file that must be started to run the system.
+Where the "fromFile" attribute points to the launch file that must be started to run the (sub-)system.
 
-Then, we added the most relevant nodes and interfaces that we wanted to expose for the integration with higher-level components. In this case robot_state_publisher, turtlebot3_joint_state, turtlebot3_diff_drive, turtlebot3_imu, camera_driver, turtlebot3_laserscan. The granularity of the description and its completeness is a decision that the developer can take. For the RosTooling a file containing only the first to lines:
+Then, we added the most relevant nodes and interfaces that we wanted to expose for the integration with higher-level components. In this case robot_state_publisher, turtlebot3_joint_state, turtlebot3_diff_drive, turtlebot3_imu, camera_driver, turtlebot3_laserscan. The granularity of the description and its completeness is a decision that the developer can take. For the RosTooling a file containing only the first two lines:
 
 ```
 turtlebot_gazebo:
   fromFile: "turtlebot3_gazebo/launch/turtlebot3_world.launch.py"
 ```
 
-is fully valid. However, for documentation and composability reasons, it is highly recommended the addition of, at least, the most prominent components. All of this information will be taken into account to generate the README.md file.
+is fully valid. However, for documentation and composability reasons, it is highly recommended the addition of, at least, the most prominent components and their interfaces. All of this information will be taken into account to generate the README.md file.
 
-## Compose the turtlebot simulation with the teleop keyboard node
+### Compose the turtlebot simulation with the teleop keyboard node [![](images/Ros2_logo.png)]
 
 As a traditional and basic case in mobile base in robotics, we can combine the simulator with the teleop node. 
 
@@ -71,7 +71,7 @@ The catalog repository includes also a keyboard teleop component, it can be foun
 
 It basically contains one node that takes the commands from the keyboard and transforms them into velocity commands using the common ROS message **geometry_msgs/Twist**.
 
-The new system can be easily designed by creating a new .rossystem file and adding the two modules we want to compose. First the turtlebot_gazebo as subsystem:
+The new system can be easily designed by creating a [new .rossystem file](LearnRosSystemModels.md) and adding the two modules we want to compose. First the turtlebot_gazebo as subsystem:
 
 ```
 turtlebot_with_teleop:
@@ -94,7 +94,7 @@ turtlebot_with_teleop:
 The file will be validated by the RosSystem compiler and the **turtlebot_with_teleop** package created under the src-gen folder.
 
 The autogenerated README file explains how to install the dependencies and start the system. 
-:bangbang: One instruction, particularly for the turtlebot is missed, the robot name has to be set as an environment variable. This means, that before you call the launch command you have to export the following variable:
+![](images/Attention.png) One instruction, particularly for the turtlebot is missed, the robot name has to be set as an environment variable. This means, that before you call the launch command you have to export the following variable:
 
 ```
 export TURTLEBOT3_MODEL=waffle_pi
@@ -119,7 +119,7 @@ turtlebot_with_teleop:
 
 The new package will be fully auto-generated. Contain the dependency on the new implementation of the teleop node and launch it together with the simulation.
 
-## Compose the turtlebot simulation with the cartographer node
+### Compose the turtlebot simulation with the cartographer node [![](images/Ros2_logo.png)]
 
 Similarly to the previous example, the system can be made more complex. An example of this is to add the [cartographer node](https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html) to the system.
 
@@ -144,7 +144,7 @@ Then basically, you have to follow the information in the README file. By launch
 ros2 run nav2_map_server map_saver_cli -f my_map
 ```
 
-## Extra notes, and consideration
+### (Optional) Extra notes, and consideration
 
 By following the previous examples you show that the RosTooling intend to support the ROS developers in the way they usually work. However, at the same time, we aim to promote the follow-up of software quality processes aided by modeling techniques.
 
