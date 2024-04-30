@@ -18,7 +18,7 @@ Press next, and then pick the Java version 19 and the folder where you would lik
 
 Continue the installation, accepting the license, as usual.
 
-Once the installation is completed, go to *Help* > *Install New Software...*. To install the latest version of the ROS tooling, add the update site URL [https://raw.githubusercontent.com/ipa320/RosTooling-update-site/main](https://raw.githubusercontent.com/ipa320/RosTooling-update-site/main)(*) in the *Work with* section.
+Once the installation is completed, go to *Help* > *Install New Software...*. To install the latest version of the ROS tooling, add the update site URL [https://raw.githubusercontent.com/ipa320/RosTooling-update-site/main](https://raw.githubusercontent.com/ipa320/RosTooling-update-site/main) in the *Work with* section.
 
 ![alt text](images/install_updatesite.png)
 
