@@ -6,15 +6,37 @@ For the auto-generation of models another strategy, parallel to [static code ana
 
 The tool [ros2model](https://github.com/ipa320/ros2model) was created for that purpose. It can be installed as every common ROS 2 package by:
 
-```
-mkdir -p ros2/ws/src
-git clone https://github.com/ipa320/ros2model ros2/ws/src/ros2model
-source /opt/ros/humble/setup.bash
-cd ros2/ws
-rosdep install --from-path src/ -i -y
-colcon build
-source install/setup.bash
-```
+1. clone this repository into the source folder in your workspace, such as:
+   ```
+   ws/src/ros2model
+   ```
+2. Source ROS workspace
+   ```
+   source /opt/ros/humble/setup.bash
+   ```
+3. Back to the folder "ws", create and active venv
+   ```
+   python3 -m venv venv --system-site-packages --symlinks
+   source venv/bin/activate
+   ```
+4. Install poetry and install dependencies
+   run
+   ```
+   pip install poetry
+   poetry install -C src/ros2model/
+   ```
+5. compile it as ROS package
+   ```
+   python -m colcon build --packages-select ros2model --symlink-install
+   ```
+   ```
+   source install/local_setup.bash
+   ```
+6. config python path
+   in this case we are using python3.10 in venv
+   ```
+   export PYTHONPATH=$PYTHONPATH:$(pwd)/venv/lib/python3.10/site-packages/
+   ```
 
 Then you can start the nodes you want to analyze. For example the common turtlesim tutorial:
 ```
