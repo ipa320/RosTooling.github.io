@@ -8,7 +8,9 @@ First, the Java environment has to be set. For Linux it can be installed with th
 sudo apt-get install openjdk-19-jre
 ```
 
-Then Eclipse can be installed. Please download the installer from the official Eclipse [website](https://www.eclipse.org/downloads/packages/installer). Once you start the installer, select the package "Eclipse Modeling Tools".
+Then Eclipse can be installed. Please download the installer from the official Eclipse [website](https://www.eclipse.org/downloads/packages/installer). After unpacking the downloaded file, the installer can be run by calling the command *./eclipse-inst* from the console. 
+
+Once you start the installer, select the package "Eclipse Modeling Tools". You can find it just by scrolling or using the searching tool:
 
 ![alt text](images/install_eclipse_modeling.png)
 
