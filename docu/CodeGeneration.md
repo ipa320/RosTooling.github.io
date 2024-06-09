@@ -8,9 +8,10 @@ For the System model, the generation of code is automatic, which means if your m
 * CMakeLists.txt: a template of the package.xml which includes the required tags to install the newly created files.
 * launch/NameOfTheSystem.launch.py script: This is the core of the generator. This is a **ready-to-execute** file that based on the .rossystem description:
   * Add includes to all the defined nodes as components
-  * Define and set the value of the parameters. For packages containing more than 5 parameters an extra .yaml file will be created and launched from this launch file.
+  * Define and set the value of the parameters. For packages containing more than 5 parameters the .yaml file under the "config" folder will be loaded and launched.
   * Remap topics to force connections. This is only working for nodes that are part of the system as components, not for subsystems. See [known issues](RosTooling_issues.md#code-generators)
   * Include other launch files from subsystems.
 * resource/NameOfTheSystem.puml: [An example of a PlantUML implementation of the described system](SystemModelsVisualization.md#open-the-plantuml-auto-generated-description)
+* config/NameOfTheSystem.yaml: this file contains the configuration of the parameters. It will only be used in case of the set of 5 parameters or more.
 
 With the current implementation of RosTooling adding new code generators to the .rossystem representation is very easy, please report on our survey on the open-ended questions your wishes like for example, the generation of install scripts and/or Docker container configuration or ROS1-ROS2 bridges.

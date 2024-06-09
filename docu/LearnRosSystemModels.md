@@ -152,7 +152,7 @@ my_awesome_system:
 The compiler will give an error of mismatched type. 
 ![](images/Attention.png) The validator has some parts not fully implemented, check the [Known issues](RosTooling_issues.md) site in case you have problems by following this tutorial.
 
-Another feature included as part of the code generator is the generator of parameter files. This will be automatically done by the set of more than 5 parameters, for example for this example:
+Another feature included as part of the code generator is the generator of parameter files. This will be automatically done and the launch file will by default load it by the set of more than 5 parameters, for example for this case:
 
 ```
 my_awesome_system:
