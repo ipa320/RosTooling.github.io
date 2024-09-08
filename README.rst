@@ -12,7 +12,7 @@ The `source code <https://github.com/ipa320/RosTooling>`_ of the entire implemen
 Installation
 ------------
 
-- `From Release <docu/Installation.md#option-1-using-the-release-version-recommended>`_
+- `From Release <docu/Installation.rst#option-1-using-the-release-version-recommended>`_
 - `Setup <docu/Environment_setup.md#1-switch-to-the-ros-developer-perspective>`_
 
 Models Review
