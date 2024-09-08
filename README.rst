@@ -75,13 +75,17 @@ Systems
 
 - `Review models and use of textual editor <docu/LearnRosSystemModels.md>`_
 - `Other ways to define a system <docu/LearnRosSystemModels2.md>`_
-<!-- - `Create your own model from nodes <docu/Example_PubSub.md>`_ -->
 - `Code generator review <docu/CodeGeneration.md>`_
 - `System Models visualization <docu/SystemModelsVisualization.md>`_
 - Real use cases execution:
-  - `Turtlesim <docu/Example_Turtlesim.md>`_ .. image:: docu/images/Ros2_logo_mini.png
-  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_ .. image:: docu/images/Ros2_logo_mini.png
-  - ~~`TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_~~ .. image:: docu/images/Ros2_logo_mini.png
+  - `Turtlesim <docu/Example_Turtlesim.md>`_ |ros2|
+  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_ |ros2|
+  - ~~`TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_~~ |ros2|
+
+.. |ros2| image:: docu/images/Ros2_logo_mini.png
+   :alt: ROS2 logo
+   :scale: 100%
+   :background: white
 
 Extra material
 --------------
