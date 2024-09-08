@@ -77,10 +77,10 @@ Systems
 - `Other ways to define a system <docu/LearnRosSystemModels2.md>`_
 - `Code generator review <docu/CodeGeneration.md>`_
 - `System Models visualization <docu/SystemModelsVisualization.md>`_
-- Real use cases execution:
-  - `Turtlesim <docu/Example_Turtlesim.md>`_ |ros2|
-  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_ |ros2|
-  - ~~`TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_~~ |ros2|
+- Real use cases execution:_
+  - `Turtlesim <docu/Example_Turtlesim.md>`_ |ros2|_
+  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_ |ros2|_
+  - ~~`TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_~~ |ros2|_
 
 .. |ros2| image:: docu/images/Ros2_logo_mini.png
    :alt: ROS2 logo
