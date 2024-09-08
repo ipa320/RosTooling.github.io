@@ -1,34 +1,35 @@
-# Setup the environment and start the Eclipse application
+Setup the environment and start the Eclipse application
+=======================================================
 
-<!-- ### 0: Start the ROS tooling application
+Switch to the ROS Developer perspective
+---------------------------------------
 
-:bangbang::bangbang: This is only needed if you installed the toolig from [source](#option-2-using-the-eclipse-installer---source-installation-ros-tooling-developers), if you installed the release version please continue directly with the [step 1](#1-switch-to-the-ros-developer-perspective)
+Go to Menu *Window* -> *Perspective* -> *Open Perspective* -> *Other...* -> *ROS developer*. Your application toolbar will be automatically configured.
 
-select de.fraunhofer.ipa.ros.plugin and press the button *Run*
+Import the common communication objects project
+-----------------------------------------------
 
-![alt text](images/run_ros_tooling.png) -->
+Import the project located under the "ROSCommonObjects" folder of this repository to the workbench of your application:
 
-### Switch to the ROS Developer perspective
+.. code-block:: none
 
-Go to Menu Window -> Perspective -> Open Perspective -> Other... -> ROS developer. Your application toolbar will be automatically configured.
+   de.fraunhofer.ipa.ros.communication.objects
 
-### Import the common communication objects project
+If you have an internet connection, you can use the button that clones the objects from GitHub into your workspace and imports them automatically:
 
-import the project located under the "ROSCommonObjects" folder of this repository to the workbench of your application:
-```
-de.fraunhofer.ipa.ros.communication.objects
-```
+.. image:: images/clone_and_import.png
 
-If you have internet a button can clone from GitHub the objects to your workspace and import them automatically:
+.. image:: images/Attention.png
 
-![alt text](images/clone_and_import.png)
+This button will only work on Linux machines. Alternatively, you can manually clone the `repository <https://github.com/ipa320/RosCommonObjects>`_ and import the project by navigating to *File* -> *Import* -> *General* -> *Existing Projects into Workspace*. 
+Then select the container folder of the cloned repository.
 
-![](images/Attention.png) This button will only work on Linux machines. Alternatively, you can clone manually the [repository](https://github.com/ipa320/RosCommonObjects) and import the project by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
+Import the catalog
+------------------
 
-### Import the catalog
+You can also download and import a pre-existing catalog of examples. The catalog is publicly available on GitHub: `ipa-nhg/RosModelsCatalog <https://github.com/ipa-nhg/RosModelsCatalog>`_.
 
-Also, you can download and import a pre-existing catalog of examples. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
+Please clone the repository and import it into your Eclipse workspace. This can be easily done by navigating to *File* -> *Import* -> *General* -> *Existing Projects into Workspace*. 
+Then select the container folder of the cloned repository.
 
-Please clone the repository and import it to your Eclipse workspace. This can be easily done by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
-
-![alt text](images/01_mobile_base_b.gif)
+.. image:: images/01_mobile_base_b.gif

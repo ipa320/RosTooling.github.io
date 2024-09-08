@@ -32,7 +32,7 @@ Check the box in front of *ROS model* and click *Next* to review the list of ite
 Eclipse will then start to install the ROS tooling and its dependencies. If you get a security warning about authenticity, click OK. 
 Finally, when asked, restart Eclipse to complete the installation process.
 
-To start using the ROS tooling continue with `step 1 <Environment_setup.md/#1-switch-to-the-ros-developer-perspective>`_.
+To start using the ROS tooling continue with `step 1 <Environment_setup.rst/#1-switch-to-the-ros-developer-perspective>`_.
 
 
 Alternative installations
@@ -77,4 +77,4 @@ select the check box *Show all variables* and change the *Ros model GitHub repos
 Follow the installation instructions of the Oomph installer dialog. After the installation, Eclipse will be restarted to launch the ROS tooling configuration. 
 Finally, when all the startup tasks are finished, press "Workbench."
 
-To start using the ROS tooling continue with `step 0 <Environment_setup.md/#0-start-the-ros-tooling-application>`_.
+To start using the ROS tooling continue with `step 0 <Environment_setup.rst/#0-start-the-ros-tooling-application>`_.
