@@ -13,7 +13,7 @@ Installation
 ------------
 
 - `From Release <docu/Installation.rst#option-1-using-the-release-version-recommended>`_
-- `Setup <docu/Environment_setup.md#1-switch-to-the-ros-developer-perspective>`_
+- `Setup <docu/Environment_setup.rst#1-switch-to-the-ros-developer-perspective>`_
 
 Models Review
 -------------
@@ -27,7 +27,7 @@ The RosTooling divides the ROS concepts into three layers of models:
 Components (.ros1, .ros2)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `How to describe ROS nodes using models <docu/RosModelDescription.md>`_
+- `How to describe ROS nodes using models <docu/RosModelDescription.rst>`_
 - `Parameters API reference and examples <docu/ParametersAPI.md>`_
 
 Communication objects (.ros)
