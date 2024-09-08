@@ -151,7 +151,7 @@ The types of supported parameters are:
 - Array [Type]
 - Struct [Name Type, Name Type]
 
-For more details about parameters, please check the `site about the parameters definition <ParametersAPI.md>`_.
+For more details about parameters, please check the `site about the parameters definition <ParametersAPI.rst>`_.
 
 See the following example for the `aruco_ros <https://github.com/pal-robotics/aruco_ros>`_ driver:
 
