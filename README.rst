@@ -81,15 +81,10 @@ Systems
 
   - `Turtlesim <docu/Example_Turtlesim.md>`_
 
-  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_ (.. image:: docu/images/Ros2_logo_mini.png
-                                                                          :alt: ROS2 logo
-                                                                          :scale: 100%
-                                                                          :background: white)
+  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_
 
-  - ~~`TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_~~ (.. image:: docu/images/Ros2_logo_mini.png
-                                                                          :alt: ROS2 logo
-                                                                          :scale: 100%
-                                                                          :background: white)
+  - `TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_
+
 .. |ros2| image:: docu/images/Ros2_logo_mini.png
    :alt: ROS2 logo
    :scale: 100%
