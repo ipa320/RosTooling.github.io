@@ -203,4 +203,4 @@ It also incorporates the auto-complete function, which is available by pressing 
 
 .. image:: images/RosModelAutocomplete.gif
 
-In the `tutorials <LearnRosModels.md>`_, you will be guided to try all of these features.
+In the `tutorials <LearnRosModels.rst>`_, you will be guided to try all of these features.

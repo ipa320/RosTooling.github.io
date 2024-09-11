@@ -28,12 +28,12 @@ Components (.ros1, .ros2)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - `How to describe ROS nodes using models <docu/RosModelDescription.rst>`_
-- `Parameters API reference and examples <docu/ParametersAPI.md>`_
+- `Parameters API reference and examples <docu/ParametersAPI.rst>`_
 
 Communication objects (.ros)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `Messages, services and actions generator <docu/NewCommunicationObjects.md>`_
+- `Messages, services and actions generator <docu/NewCommunicationObjects.rst>`_
 
 Systems (.rossystem)
 ~~~~~~~~~~~~~~~~~~~~
