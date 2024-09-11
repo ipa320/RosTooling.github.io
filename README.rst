@@ -38,7 +38,7 @@ Communication objects (.ros)
 Systems (.rossystem)
 ~~~~~~~~~~~~~~~~~~~~
 
-- `How to describe ROS systems using model <docu/RosSystemModelDescription.md>`_
+- `How to describe ROS systems using model <docu/RosSystemModelDescription.rst>`_
 
 Tutorials
 ---------
