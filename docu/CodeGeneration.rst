@@ -14,10 +14,10 @@ For the System model, the generation of code is automatic. This means if your mo
 - **launch/NameOfTheSystem.launch.py script**: This is the core of the generator. It is a **ready-to-execute** file based on the `.rossystem` description:
   - Add includes for all the defined nodes as components
   - Define and set the values of the parameters. For packages containing more than 5 parameters, the `.yaml` file under the "config" folder will be loaded and launched.
-  - Remap topics to force connections (only working for nodes that are part of the system as components, not for subsystems). See `known issues <RosTooling_issues.md#code-generators>`_.
+  - Remap topics to force connections (only working for nodes that are part of the system as components, not for subsystems). See `known issues <RosTooling_issues.rst#code-generators>`_.
   - Include other launch files from subsystems.
 
-- **resource/NameOfTheSystem.puml**: `An example of a PlantUML implementation of the described system <SystemModelsVisualization.md#open-the-plantuml-auto-generated-description>`_.
+- **resource/NameOfTheSystem.puml**: `An example of a PlantUML implementation of the described system <SystemModelsVisualization.rst#open-the-plantuml-auto-generated-description>`_.
 
 - **config/NameOfTheSystem.yaml**: This file contains the configuration of the parameters. It will only be used if there are 5 or more parameters.
 

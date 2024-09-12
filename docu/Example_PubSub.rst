@@ -17,7 +17,7 @@ Once the project is created, you can create a new file by selecting **File -> Ne
 .. image:: images/pubsub_tutorial2.gif
    :alt: Create new file
 
-Following the format of the `Ros model <RosModelDescription.md>`_, we can now create a new ROS package that contains a node with a publisher.
+Following the format of the `Ros model <RosModelDescription.rst>`_, we can now create a new ROS package that contains a node with a publisher.
 
 The first line of the model must contain the name of the package. As part of the model's grammar, a colon `:` will close the name definition line:
 
@@ -80,7 +80,7 @@ The subscriber model will look like this:
 
 Now that we have the components, we can compose them. For that, we need to create a new `.rossystem` file. Again, go to **File -> New -> Other -> File**. The new file must have the `.rossystem` extension.
 
-In the `RosSystem description <RosSystemModelDescription.md>`_, we explain the format of a system, and the editor will assist you in writing the model correctly.
+In the `RosSystem description <RosSystemModelDescription.rst>`_, we explain the format of a system, and the editor will assist you in writing the model correctly.
 
 First, a name must be provided followed by a colon `:`. Then, add indentation, and press **Ctrl + Space** for help. Next, define the nodes that compose the system. Under "from", we link our previously created nodes using the grammar **PackageName.NodeName**.
 

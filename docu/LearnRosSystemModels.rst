@@ -159,7 +159,7 @@ The compiler will give a type mismatch error.
 .. image:: images/Attention.png
    :alt: Attention
 
-The validator has some parts that are not fully implemented. Check the `Known issues <RosTooling_issues.md>`_ page if you encounter problems while following this tutorial.
+The validator has some parts that are not fully implemented. Check the `Known issues <RosTooling_issues.rst>`_ page if you encounter problems while following this tutorial.
 
 Another feature included as part of the code generator is the generation of parameter files. This will be done automatically, and the launch file will, by default, load it when more than 5 parameters are set. For example, in this case:
 

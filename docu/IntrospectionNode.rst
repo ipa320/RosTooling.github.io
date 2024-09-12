@@ -1,7 +1,7 @@
 Create a ROS model from a deployed robot using our introspection at runtime tool (for ROS 2 systems)
 ===================================================================================================
 
-Please ensure that the tool is installed and your workspace is set up. See the `installation guide <../README.md>`_ for further details.
+Please ensure that the tool is installed and your workspace is set up. See the `installation guide <../README.rst>`_ for further details.
 
 The tools documented here were conceived as a simple way to obtain models of systems that are already developed during their execution. This series of scripts uses the popular ROS `rosgraph` library to obtain a list of the interfaces present in the system at runtime.
 

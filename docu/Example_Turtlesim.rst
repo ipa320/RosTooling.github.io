@@ -67,7 +67,7 @@ Once the project is created, you can create a new file by selecting **File -> Ne
 
 Now that we have the components, we can compose them. To do this, we need to create a new `.rossystem` file. Again, go to **File -> New -> Other -> File**. The new file must have the `.rossystem` extension.
 
-In the `RosSystem description <RosSystemModelDescription.md>`_, we explain the format of a system, and the editor will assist you in writing the model correctly.
+In the `RosSystem description <RosSystemModelDescription.rst>`_, we explain the format of a system, and the editor will assist you in writing the model correctly.
 
 First, give a name followed by a colon `:`, then add indentation. You can press **Ctrl + Space** for help. 
 Firstly, we will add the two nodes that compose our system.
