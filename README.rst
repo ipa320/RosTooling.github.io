@@ -64,26 +64,26 @@ Many thanks for your help :)
 Components
 ~~~~~~~~~~
 
-- `Review models and use of textual editor <docu/LearnRosModels.md>`_
-- (Optional) ~~`Create your own model <docu/CreateYourModel.md>`_~~
-- `Generate code from model description <docu/rossdl.md>`_ .. image:: docu/images/Ros2_logo_mini.png
-- `Extract models using static code analysis <docu/StaticCodeAnalyis.md>`_ .. image:: docu/images/docker_logo.png
-- `Extract component models using introspection at runtime <docu/ros2model.md>`_ .. image:: docu/images/Ros2_logo_mini.png
+- `Review models and use of textual editor <docu/LearnRosModels.rst>`_
+- (Optional) `Create your own model <docu/CreateYourModel.rst>`_
+- `Generate code from model description <docu/rossdl.rst>`_ .. image:: docu/images/Ros2_logo_mini.png
+- `Extract models using static code analysis <docu/StaticCodeAnalyis.rst>`_ .. image:: docu/images/docker_logo.png
+- `Extract component models using introspection at runtime <docu/ros2model.rst>`_ .. image:: docu/images/Ros2_logo_mini.png
 
 Systems
 ~~~~~~~
 
-- `Review models and use of textual editor <docu/LearnRosSystemModels.md>`_
-- `Other ways to define a system <docu/LearnRosSystemModels2.md>`_
-- `Code generator review <docu/CodeGeneration.md>`_
-- `System Models visualization <docu/SystemModelsVisualization.md>`_
+- `Review models and use of textual editor <docu/LearnRosSystemModels.rst>`_
+- `Other ways to define a system <docu/LearnRosSystemModels2.rst>`_
+- `Code generator review <docu/CodeGeneration.rst>`_
+- `System Models visualization <docu/SystemModelsVisualization.rst>`_
 - Real use cases execution:
 
-  - `Turtlesim <docu/Example_Turtlesim.md>`_
+  - `Turtlesim <docu/Example_Turtlesim.rst>`_
 
-  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.md>`_
+  - `Beginner - Mobile base on simulation <docu/MobileBase_beginner.rst>`_
 
-  - `TBD - Advanced - Manipulation <docu/Manipulation_advanced.md>`_
+  - `TBD - Advanced - Manipulation <docu/Manipulation_advanced.rst>`_
 
 .. |ros2| image:: docu/images/Ros2_logo_mini.png
    :alt: ROS2 logo
@@ -93,6 +93,6 @@ Systems
 Extra material
 --------------
 
-- `Eclipse known issues <docu/eclipse_issues.md>`_
-- `RosTooling Known issues <docu/RosTooling_issues.md>`_
-- `Create your own model from nodes <docu/Example_PubSub.md>`_
+- `Eclipse known issues <docu/eclipse_issues.rst>`_
+- `RosTooling Known issues <docu/RosTooling_issues.rst>`_
+- `Create your own model from nodes <docu/Example_PubSub.rst>`_
