@@ -1,0 +1,11 @@
+# RosTooling.github.io
+
+This repository holds the source and configuration files used to generate the [RosTooling documentation](https://ipa320.github.io/RosTooling.github.io/) page.
+
+Dependencies for Build: 
+* [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html)
+* `sudo apt install python3-pip`
+* `pip install sphinx`
+* `sphinx-build -b html . _build`
+
+The last command will create a _build folder to contain the html implementation.
