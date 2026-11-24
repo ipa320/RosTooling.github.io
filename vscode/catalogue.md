@@ -33,6 +33,10 @@ If the download fails, the standard ROS types may not resolve until you sync aga
 
 Choosing a node or subsystem adds it to your system. Models that come from the catalogue are read-only, and marked as such.
 
+:::{note}
+Importing a node of the catalogue, as opposed to a node of your workspace, needs a RosTooling version that is newer than the current release. The server of the current release does not add it and the Studio shows no message.
+:::
+
 ## Your own models
 
 Your workspace is part of the catalogue: the `.ros2`, `.ros` and `.rossystem` files in it are found in the same way. To use models from a place outside of the workspace, open the **Sources** tab and click **Add Custom Folder…**. The folder is indexed and its models appear in the other tabs. The **Custom Folders** list of the tab has a button for removing a folder again. The folders are saved in a configuration file in the catalogue storage.
