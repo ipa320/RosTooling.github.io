@@ -1,4 +1,8 @@
-# Setup the environment and start the Eclipse application
+# Set up the Eclipse application (legacy)
+
+```{note}
+This page is for the Eclipse application. In VS Code there is nothing to set up, see [Getting started](../vscode/getting-started.md).
+```
 
 <!-- ### 0: Start the ROS tooling application
 

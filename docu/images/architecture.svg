@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" font-family="Helvetica, Arial, sans-serif" font-size="14">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#555"/></marker></defs>
+<rect width="760" height="430" fill="#fff"/>
+<text x="20" y="28" font-weight="bold" font-size="15">Clients</text>
+<rect x="20" y="40" width="150" height="60" rx="8" fill="#e8f0fe" stroke="#4a6fa5"/><text x="95" y="66" text-anchor="middle">VS Code</text><text x="95" y="86" text-anchor="middle" font-size="12">extension + Studio</text>
+<rect x="195" y="40" width="150" height="60" rx="8" fill="#e8f0fe" stroke="#4a6fa5"/><text x="270" y="66" text-anchor="middle">AI agents</text><text x="270" y="86" text-anchor="middle" font-size="12">via MCP server</text>
+<rect x="370" y="40" width="150" height="60" rx="8" fill="#e8f0fe" stroke="#4a6fa5"/><text x="445" y="66" text-anchor="middle">Other editors</text><text x="445" y="86" text-anchor="middle" font-size="12">any LSP client</text>
+<rect x="545" y="40" width="195" height="60" rx="8" fill="#f1ede4" stroke="#8a7a55"/><text x="642" y="66" text-anchor="middle">Eclipse (legacy)</text><text x="642" y="86" text-anchor="middle" font-size="12">editors, perspective, OSGi</text>
+<path d="M95 100V160M270 100L270 130L150 130L150 160M445 100V160M642 100V160" stroke="#555" fill="none" marker-end="url(#a)"/>
+<text x="20" y="150" font-size="12" fill="#555">LSP / GLSP / commands</text>
+<rect x="20" y="165" width="720" height="120" rx="10" fill="#eaf5ea" stroke="#4f8a4f"/>
+<text x="36" y="188" font-weight="bold" font-size="15">RosTooling core (Java, one fat JAR)</text>
+<rect x="36" y="200" width="150" height="70" rx="6" fill="#fff" stroke="#4f8a4f"/><text x="111" y="225" text-anchor="middle">Xtext languages</text><text x="111" y="245" text-anchor="middle" font-size="12">.ros .ros1 .ros2</text><text x="111" y="260" text-anchor="middle" font-size="12">.rossystem, validation</text>
+<rect x="200" y="200" width="150" height="70" rx="6" fill="#fff" stroke="#4f8a4f"/><text x="275" y="225" text-anchor="middle">Language server</text><text x="275" y="245" text-anchor="middle" font-size="12">LSP + generator</text><text x="275" y="260" text-anchor="middle" font-size="12">commands</text>
+<rect x="364" y="200" width="150" height="70" rx="6" fill="#fff" stroke="#4f8a4f"/><text x="439" y="225" text-anchor="middle">GLSP server</text><text x="439" y="245" text-anchor="middle" font-size="12">diagram, layout,</text><text x="439" y="260" text-anchor="middle" font-size="12">auto-connect</text>
+<rect x="528" y="200" width="196" height="70" rx="6" fill="#fff" stroke="#4f8a4f"/><text x="626" y="225" text-anchor="middle">Generators</text><text x="626" y="245" text-anchor="middle" font-size="12">C++/Python wrappers, launch</text><text x="626" y="260" text-anchor="middle" font-size="12">files, target distributions</text>
+<path d="M370 285V320M200 285V320M560 285V320" stroke="#555" fill="none" marker-end="url(#a)"/>
+<rect x="20" y="325" width="230" height="80" rx="8" fill="#fdf1e3" stroke="#b07a2e"/><text x="135" y="350" text-anchor="middle">Plugins (Preview)</text><text x="135" y="370" text-anchor="middle" font-size="12">JARs, trusted by SHA-256,</text><text x="135" y="385" text-anchor="middle" font-size="12">add @ blocks and outputs</text>
+<rect x="265" y="325" width="230" height="80" rx="8" fill="#fdf1e3" stroke="#b07a2e"/><text x="380" y="350" text-anchor="middle">Model files</text><text x="380" y="370" text-anchor="middle" font-size="12">.ros .ros2 .rossystem,</text><text x="380" y="385" text-anchor="middle" font-size="12">.layout, catalogue</text>
+<rect x="510" y="325" width="230" height="80" rx="8" fill="#fdf1e3" stroke="#b07a2e"/><text x="625" y="350" text-anchor="middle">Generated ROS 2 packages</text><text x="625" y="370" text-anchor="middle" font-size="12">src-gen/: nodes, launch,</text><text x="625" y="385" text-anchor="middle" font-size="12">CMake / setup.py</text>
+</svg>

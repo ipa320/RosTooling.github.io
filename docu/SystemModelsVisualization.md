@@ -1,11 +1,13 @@
 # System visualization
+
+In VS Code, the diagram of a system is [RosTooling Studio](../vscode/studio.md): open a `.rossystem` file in it to see the nodes, their ports and the connections, and edit them there. This page describes the two other ways, which come from the Eclipse application. The PlantUML description is generated in VS Code as well.
 The RosTooling offers two visualization options:
 * By the generation of [PlantUML](https://plantuml.com/) diagrams
-* By using a [Sirius](https://eclipse.dev/sirius/) implementation as Eclipse plugin.
+* By using a [Sirius](https://eclipse.dev/sirius/) implementation as Eclipse plugin (Eclipse only, legacy).
 
 ## PlantUML compiler
 
-### Embedded the viewer on the Eclipse environment
+### Embedded the viewer on the Eclipse environment (legacy)
 
 The Eclipse Marketplace includes a PlantUML plugin. To install it go to Eclipse to Help -> Eclipse Marketplace..  and search for "PlantUML". Select the Plugin and let Eclipse install it.
 
@@ -34,7 +36,7 @@ Alternatively, you can copy the content of the generated file to an online Plant
 #### Known Issues 
 ![](images/Attention.png) Unfortunately, PlantUML, specifically the template here generated is not supporting large systems. They show cut. Also sometimes the generated file has issues because of duplicated ports. We are considering the reimplementation of the template.
 
-## Sirius visualizer
+## Sirius visualizer (Eclipse only, legacy)
 
 ### Install Sirius on Eclipse
 

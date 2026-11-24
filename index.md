@@ -1,81 +1,69 @@
 # RosTooling
 
-Welcome to the RosTooling documentation page! :)
+RosTooling bridges the advantages of ROS with those of model-driven software development. At its core are models that describe the code ROS developers write every day, both for a single package and for a whole system. Around the models are tools: validators, code generators, a diagram editor and extractors that create models from existing code.
 
-The RosTooling aims to bridge the advantages of ROS with those of model-driven software development. At its core are a set of models that describe "every day" code developed by ROS developers, both at the component and system levels. These models are supported with different types of tools including model extractors from code, validators and code generators.
+The source code is open: [RosTooling](https://github.com/ipa320/RosTooling) (languages and generators) and [RosTooling_Extension](https://github.com/ipa-esa/RosTooling_Extension) (VS Code extension). Contributions, feedback and suggestions are welcome.
 
-We invite you to take a look at the tutorials to learn more about this tooling and its uses.
+::::{grid} 1 1 2 2
+:gutter: 3
 
-The [source code](https://github.com/ipa320/RosTooling) of the entire implementation of the tooling is completely open-source, contributions, feedback and suggestions are always welcome. 
+:::{grid-item-card} VS Code Extension
+:link: vscode/overview
+:link-type: doc
 
-## Installation
+Edit models with language support, draw systems in RosTooling Studio, generate ROS 2 packages and let AI agents author models. **Start here.**
+:::
 
-- [From Release](docu/Installation.md#option-1-using-the-release-version-recommended)
-- [Setup](docu/Environment_setup.md#switch-to-the-ros-developer-perspective)
+:::{grid-item-card} RosTooling
+:link: docu/Installation
+:link-type: doc
 
-## Models Review
+The languages, the validation and the generators behind every client, and how to install them.
+:::
+::::
 
-The RosTooling divides the ROS concepts into three layers of models:
+## Start
 
-- Ros objects models: they represent the interface types. In ROS world the message, services and action types. This file has the .ros extension and allows a yaml format similar to the ROS .msgs, .srvs and .action files.
-- Ros packages (component) models: they represent the filesystem level of ROS packages, as well as the computational graph. In other words, the package description, the implemented artifacts and the communication ports the nodes offer. They have two different implementations, for ROS (1) (.ros1 extension) or for ROS 2 (.ros2 extension files.) 
-- Ros System models: they represent the ROS nodes as components present in a system and the connections among them. The file extension of this type of model is .rossystem.
+- [Install](docu/Installation.md) the extension and [try the whole path once](vscode/getting-started.md): open a system, connect nodes, generate a package, build it.
+- Learn by [tutorials](docu/LearnRosModels.md): first models, a system, a publisher and subscriber, turtlesim and a mobile base.
+- See [What's new in 2026](docu/WhatsNew.md) if you know an earlier version.
 
-## Components (.ros1, .ros2)
+## The model layers
 
-- [How to describe ROS nodes using models](docu/RosModelDescription.md)
-- [Parameters API reference and examples](docu/ParametersAPI.md)
+RosTooling describes ROS in three layers of models. Each has its own file type, and each layer refers to the one below.
 
-## Communication objects (.ros)
-- [Messages, services and actions generator](docu/NewCommunicationObjects.md)
+| Layer | Files | Describes |
+| --- | --- | --- |
+| Communication objects | `.ros` | Message, service and action types, similar to `.msg`, `.srv` and `.action` files. See [Messages, services and actions](docu/NewCommunicationObjects.md). |
+| Packages | `.ros2`, `.ros1` | A ROS package: its nodes, their publishers, subscribers, services, actions and parameters. See [Packages](docu/RosModelDescription.md). |
+| Systems | `.rossystem` | Nodes in a system and the connections between them. See [Systems](docu/RosSystemModelDescription.md). |
 
-## Systems (.rossystem)
-- [How to describe ROS systems using model](docu/RosSystemModelDescription.md)
+## Where to go
 
-## Tutorials
+| I want to | Go to |
+| --- | --- |
+| Generate code from a model | [Code generation](docu/Ros2CodeGeneration.md), [target distributions](docu/TargetDistributions.md) |
+| Extend the generators with my own blocks (Preview) | [Plugin concepts](docu/PluginConcepts.md) |
+| Create models from existing code | [Static code analysis](docu/StaticCodeAnalyis.md), [introspection](docu/ros2model.md) |
+| Use RosTooling from another editor or tool | [LSP commands](docu/LspCommands.md), [diagram server](docu/GlspServer.md) |
+| Understand how the parts fit | [Architecture overview](docu/Architecture.md) |
+| Fix a problem | [Known issues](docu/RosTooling_issues.md) |
+| Work on RosTooling itself | [Building, testing and releasing](docu/Release.md) |
+| Use the Eclipse application | [Installation](docu/Installation.md#eclipse-legacy) (legacy) |
 
-![](docu/images/Attention.png) All tutorials were created on Linux. In addition, some of them require a local installation of ROS 2, whose are marked with the logo (![](docu/images/Ros2_logo_mini.png)). The modeling part should run on other OS so far Eclipse is properly installed and also the required Java packages (jre and jdk), the current version of the RosTooling requires Java 19 or higher.
+The tutorials were written on Linux. Those that run ROS 2 need a local installation of it. The models themselves can be edited on any operating system that runs VS Code and Java 21.
 
-In case you have already installed the RosTooling, we recommend to pull always the latest version, go to "Help"->"Check for Updates", in case a new version is available it will be proposed to be updated.
+## Feedback and contact
 
-If you get issues during the execution of these tutorials please report them under the following [https://github.com/ipa320/RosTooling.github.io/issues](https://github.com/ipa320/RosTooling.github.io/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=). In case you don't have a GitHub account, please just send an email to nhg@ipa.fhg.de. 
-
-Also, we will be very thankful if once you complete the tutorials you take 15 minutes to fulfill our survey, this will help us to improve our solution: [Survey link](https://forms.office.com/e/2V5pPwcY7V). 
-
-Many thanks for your help :)
-
-
-
-
-## Components
-
-- [Review models and use of textual editor](docu/LearnRosModels.md)
-- - [Generate code from model description](docu/Ros2CodeGeneration.md) (![](docu/images/Ros2_logo_mini.png))
-- [Extract models using static code analysis](docu/StaticCodeAnalyis.md) (![](docu/images/docker_logo.png))
-- [Extract component models using introspection at runtime](docu/ros2model.md) (![](docu/images/Ros2_logo_mini.png))
-
-## Systems
-
-- [Review models and use of textual editor](docu/LearnRosSystemModels.md)
-- [Other ways to define a system](docu/LearnRosSystemModels2.md)
-- [Code generator review](docu/CodeGeneration.md)
-- [System Models visualization](docu/SystemModelsVisualization.md)
-- Real use cases execution:
-  - [Turtlesim](docu/Example_Turtlesim.md) (![](docu/images/Ros2_logo_mini.png))
-  - [Beginner - Mobile base on simulation](docu/MobileBase_beginner.md) (![](docu/images/Ros2_logo_mini.png))
-
-## Extra material
-
-- [Eclipse known issues](docu/eclipse_issues.md)
-- [RosTooling Known issues](docu/RosTooling_issues.md)
-- [Create your own model from nodes](docu/Example_PubSub.md)
+Report problems on the [issue tracker of this site](https://github.com/ipa320/RosTooling.github.io/issues/new?template=bug_report.md) or contact Eshan Savla: [eshan.savla@ipa.fraunhofer.de](mailto:eshan.savla@ipa.fraunhofer.de).
 
 ```{toctree}
 :hidden:
 :caption: Get started
 
 docu/Installation
-docu/Environment_setup
+docu/WhatsNew
+docu/Architecture
 ```
 
 ```{toctree}
@@ -111,6 +99,14 @@ docu/PluginBtExample
 
 ```{toctree}
 :hidden:
+:caption: Integration
+
+docu/LspCommands
+docu/GlspServer
+```
+
+```{toctree}
+:hidden:
 :caption: Models from code
 
 docu/StaticCodeAnalyis
@@ -141,8 +137,16 @@ docu/MobileBase_beginner
 :caption: Help
 
 docu/RosTooling_issues
-docu/eclipse_issues
 docu/Release
+```
+
+```{toctree}
+:hidden:
+:caption: Eclipse (legacy)
+
+docu/Environment_setup
+docu/eclipse_issues
+docu/EclipsePlugin
 ```
 
 ```{toctree}

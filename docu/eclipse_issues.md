@@ -1,6 +1,6 @@
-# Eclipse "issues"
+# Eclipse known issues (legacy)
 
-The current version of the RosTooling is built on top of Eclipse. Some issues related to this IDE can appear during the execution of these tutorials.
+These notes are for the Eclipse application, see [Installation](Installation.md#eclipse-legacy). Some issues related to this IDE can appear during the execution of these tutorials.
 
 Before you start editing the models you must be sure that Eclipse is building automatically your workspace by every change you make. This means you must have enabled the option "Build automatically" under the menu "Project".
 
