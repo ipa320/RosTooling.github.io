@@ -41,4 +41,5 @@ redirects = {
     "docu/CreateYourModel": "LearnRosModels.html",
     "docu/NewRosModel": "StaticCodeAnalyis.html",
     "docu/IntrospectionNode": "ros2model.html",
+    "docu/rossdl": "Ros2CodeGeneration.html",
 }

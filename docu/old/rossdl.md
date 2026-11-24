@@ -1,8 +1,16 @@
-# Generate code from model description [![](images/Ros2_logo.png)]
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived. It described the external `rossdl` package. The code generation is now part of RosTooling and is described in [ROS 2 code generation](../Ros2CodeGeneration.md).
+:::
+
+# Generate code from model description [![](../images/Ros2_logo.png)]
 
 This tutorial requires a local ROS 2 installation and some experience with ROS 2. It is based on the package [rossdl](https://github.com/CoreSenseEU/rossdl).
 
-## Installation [![](images/Ros2_logo.png)]
+## Installation [![](../images/Ros2_logo.png)]
 
 Firstly, you have to create your ROS2 workspace, clone and compile the rossdl package:
 
@@ -16,7 +24,7 @@ colcon build
 source install/setup.bash
 ```
 
-## Code template [![](images/Ros2_logo.png)]
+## Code template [![](../images/Ros2_logo.png)]
 
 
 The rossdl repository contains some examples. The use of the rossdl package starts by creating a clean ROS package that contains a ros2 description model. Let's use the basic template available on [GitHub](https://github.com/ipa-nhg/rossdl/tree/BasicExampleNHG/rossdl_tests/basic_template).

@@ -157,7 +157,7 @@ wrong_system:
 
 ## Parameters of the whole system
 
-A system model can declare parameters of its own. They have a type and a default, and become launch arguments of the generated launch file. See [Parameters of the whole system](RosSystemModelDescription.md#parameters-of-the-whole-system).
+A system model can declare parameters of its own. They have a type and a value, and become launch arguments of the generated launch file. See [Parameters of the whole system](RosSystemModelDescription.md#parameters-of-the-whole-system).
 
 ## Launch substitutions
 

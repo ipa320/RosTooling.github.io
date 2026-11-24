@@ -50,7 +50,7 @@ Many thanks for your help :)
 ## Components
 
 - [Review models and use of textual editor](docu/LearnRosModels.md)
-- - [Generate code from model description](docu/rossdl.md) (![](docu/images/Ros2_logo_mini.png))
+- - [Generate code from model description](docu/Ros2CodeGeneration.md) (![](docu/images/Ros2_logo_mini.png))
 - [Extract models using static code analysis](docu/StaticCodeAnalyis.md) (![](docu/images/docker_logo.png))
 - [Extract component models using introspection at runtime](docu/ros2model.md) (![](docu/images/Ros2_logo_mini.png))
 
@@ -93,8 +93,9 @@ docu/Validation
 :hidden:
 :caption: Code generation
 
-docu/rossdl
+docu/Ros2CodeGeneration
 docu/CodeGeneration
+docu/TargetDistributions
 ```
 
 ```{toctree}

@@ -175,10 +175,10 @@ params_system:
   parameters:
     "filter_rate":
       type: Double
-      default: 20.0
+      value: 20.0
     "filter_topic":
       type: String
-      default: "scan"
+      value: "scan"
   nodes:
     "filter":
       from: "params_pkg.filter"
@@ -193,7 +193,7 @@ params_system:
 
 ### Parameters of the whole system
 
-`parameters:` directly under the system declares parameters of the system itself. Each one has a type and optionally a default value. In the generated launch file they become launch arguments, so the system can be configured when it is started: `ros2 launch <package> <system>.launch.py filter_rate:=30.0`.
+`parameters:` directly under the system declares parameters of the system itself. Each one has a type and a `value:`, which is its starting value. In the generated launch file they become launch arguments, so the system can be configured when it is started: `ros2 launch <package> <system>.launch.py filter_rate:=30.0`.
 
 ### Launch substitutions
 
@@ -218,7 +218,7 @@ subst_system:
   parameters:
     "robot":
       type: String
-      default: "robot1"
+      value: "robot1"
   nodes:
     "loader":
       from: "subst_pkg.loader"
