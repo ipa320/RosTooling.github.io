@@ -64,6 +64,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--server", default=os.environ.get("ROSTOOLING_SERVER_SCRIPT"))
     ap.add_argument("--list", action="store_true", help="only list the examples found")
+    ap.add_argument("--include-skipped", action="store_true", help="also run the groups marked skip=")
     args = ap.parse_args()
     groups = collect()
     if args.list:
@@ -80,7 +81,7 @@ def main():
     skipped = 0
     with tempfile.TemporaryDirectory() as tmp:
         for key, g in groups.items():
-            if g["skip"]:
+            if g["skip"] and not args.include_skipped:
                 print(f"skip {key} ({g['skip']})")
                 skipped += 1
                 continue

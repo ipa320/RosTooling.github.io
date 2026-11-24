@@ -105,6 +105,10 @@ params_system:
 
 A binary value for a `Base64` parameter is written like this:
 
+:::{note}
+Base64 values need a RosTooling version that is newer than the current release. The server of the current release rejects them.
+:::
+
 <!-- check: group=base64 file=base64_pkg.ros2 skip="Base64 values are rejected by the server" -->
 ```text
 base64_pkg:

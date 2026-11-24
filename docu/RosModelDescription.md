@@ -63,6 +63,10 @@ structure_pkg:
 
 Every entry is added as a `<depend>` entry to the generated `package.xml`.
 
+:::{note}
+Naming another package model in `dependencies:` needs a RosTooling version that is newer than the current release. The server of the current release only accepts `ExternalDependency`.
+:::
+
 <!-- check: group=dependency file=base_pkg.ros2 skip="package dependencies do not resolve yet" -->
 ```text
 base_pkg:
