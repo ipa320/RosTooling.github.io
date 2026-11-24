@@ -100,6 +100,17 @@ docu/TargetDistributions
 
 ```{toctree}
 :hidden:
+:caption: Plugins (Preview)
+
+docu/PluginConcepts
+docu/PluginBlocks
+docu/PluginLoading
+docu/PluginDevelopment
+docu/PluginBtExample
+```
+
+```{toctree}
+:hidden:
 :caption: Models from code
 
 docu/StaticCodeAnalyis
