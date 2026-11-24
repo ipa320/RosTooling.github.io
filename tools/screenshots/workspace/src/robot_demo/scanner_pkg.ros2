@@ -1,0 +1,33 @@
+scanner_pkg:
+  artifacts:
+    laser_driver:
+      node: laser_driver
+      publishers:
+        scan:
+          type: "sensor_msgs/msg/LaserScan"
+          qos:
+            profile: sensor_qos
+      parameters:
+        frame_id:
+          type: String
+          default: "laser"
+        rate_hz:
+          type: Double
+          default: 10.0
+    scan_filter:
+      node: scan_filter
+      lifecycle: true
+      subscribers:
+        scan_in:
+          type: "sensor_msgs/msg/LaserScan"
+      publishers:
+        scan_filtered:
+          type: "sensor_msgs/msg/LaserScan"
+          active_in: [Active]
+      serviceservers:
+        reset:
+          type: "std_srvs/srv/Trigger"
+      parameters:
+        range_max:
+          type: Double
+          default: 30.0

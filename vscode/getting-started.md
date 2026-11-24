@@ -14,13 +14,24 @@ The file opens as a diagram. The text editor stays available: the **Open Code** 
 
 ## 2. Add nodes and connect them
 
-In the System view, **+ Import Node** opens the catalogue: search it, and choose a node to add. The nodes come from the `.ros2` models of your workspace and from the catalogue of ready models, see [Catalogue](catalogue.md). Each node shows its interfaces as ports.
+In the System view, **+ Import Node** opens the catalogue: search it, and choose **Import** on a node to add it. The nodes come from the `.ros2` models of your workspace and from the catalogue of ready models, see [Catalogue](catalogue.md). Each node shows its interfaces as ports.
 
-Connect a publisher to a subscriber (or a service server to a client, or an action server to a client) by dragging from a port to another, or with the **Connect** button. The Studio only lets you connect ports of the right kind and the same type. To let the Studio propose the connections that fit, use **Auto-connect**, see [Auto-connect](auto-connect.md).
+![Adding a node from the catalogue](images/studio-import-node.gif)
+
+Connect a publisher to a subscriber (or a service server to a client, or an action server to a client) by dragging from a port to another, or with the **Connect** button. The Studio only lets you connect ports of the right kind and the same type.
+
+![Connecting two ports by dragging](images/studio-connect.gif)
+
+To let the Studio propose the connections that fit, use **Auto-connect**, see [Auto-connect](auto-connect.md).
 
 ## 3. Check the model
 
 The pill in the toolbar shows **Valid**, or the number of errors and warnings. Click it to see them. The same diagnostics are in the Problems view when the file is open as text. See [Validation and diagnostics](../docu/Validation.md) for what is checked.
+
+```{image} images/studio-system.png
+:alt: A valid system in RosTooling Studio
+:width: 100%
+```
 
 ## 4. Generate the package
 
@@ -28,7 +39,14 @@ Click **Generate ROS 2 Package** in the toolbar of the Studio, or right-click a 
 
 ## 5. Build and run
 
-Run **ROSSDL: Build ROS 2 Package** from the Command Palette and choose the workspaces when asked. Then, in a terminal where the workspace is sourced:
+Copy or link the generated packages into the `src/` folder of a ROS 2 workspace, then build in a terminal in which ROS 2 is sourced:
+
+```bash
+colcon build --symlink-install
+source install/setup.bash
+```
+
+Then start the system:
 
 ```bash
 ros2 launch <system> <system>.launch.py

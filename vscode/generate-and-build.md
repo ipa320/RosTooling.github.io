@@ -4,7 +4,7 @@ The extension generates ROS 2 code from your models and can build it. This page 
 
 ## Generate the nodes of a package
 
-For a `.ros2` model, right-click the file in the Explorer or in the editor and choose **Generate ROS 2 Node Wrappers** (the command `ros2.generateWrappers`).
+For a `.ros2` model, right-click the file in the Explorer or in the editor and choose **Generate ROS 2 Node Wrappers** (the command `ros2.generateWrappers`). In the Studio, the Component view has **Generate Wrappers** in its toolbar and **Generate ROS 2 Wrappers** at the bottom of its left side.
 
 1. The extension saves the file if it has unsaved changes.
 2. You choose the language. For a package with one node it is **C++** or **Python**. For a package with several nodes it is **All C++**, **All Python**, or **Configure per node…**, which asks for the language of each node. A package can have nodes in both languages.
@@ -32,19 +32,15 @@ When a generator no longer produces a file that a plugin wrote before, the file 
 
 ## Build
 
-Copy or link the generated packages into the `src/` folder of a ROS 2 workspace. Then run **ROSSDL: Build ROS 2 Package** from the Command Palette (the command `rossdl.buildPackage`). It asks for two folders:
-
-| Folder | Meaning |
-| --- | --- |
-| ROSSDL workspace | A ROS 2 workspace that has been built already: it must contain `src` and `install/setup.bash`. Its `setup.bash` is sourced before the build. |
-| Build workspace | The workspace in which the packages are built. |
-
-The command then runs this in the build workspace, and shows the output in the **ROS LSP** output channel:
+Copy or link the generated packages into the `src/` folder of a ROS 2 workspace and build them in a terminal in which ROS 2 is sourced:
 
 ```bash
-source "<ROSSDL workspace>/install/setup.bash" && colcon build --symlink-install
+cd <workspace>
+rosdep install --from-path src/ -i -y
+colcon build --symlink-install
+source install/setup.bash
 ```
 
-The name of the command comes from the earlier tool `rossdl`, which the generators replace. You can run the build in a terminal instead, with the same command.
+The README of a generated system package has the same commands. An AI agent builds with the MCP tool `build_ros2_package`, which runs `colcon build --symlink-install` in the workspace.
 
-An AI agent builds with the MCP tool `build_ros2_package`.
+The extension also has the older command **ROSSDL: Build ROS 2 Package**. It is a leftover of the tool that the code generators replace, and it is [archived](../docu/old/RossdlBuildCommand.md).

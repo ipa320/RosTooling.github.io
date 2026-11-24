@@ -9,7 +9,7 @@ All commands are in the Command Palette (`Ctrl+Shift+P`). Some are also in the c
 | `rostooling.openVisualStudio` | RosTooling: Open in RosTooling Visual Studio | file menus, editor title bar | Opens the file in [RosTooling Studio](studio.md). |
 | `rossystem.triggerCodeGeneration` | ROSSYSTEM: Generate ROS2 Package | `.rossystem` editor, Studio | [Generates the package](generate-and-build.md#generate-the-package-of-a-system) of a system. |
 | `ros2.generateWrappers` | ROS2: Generate ROS 2 Node Wrappers | `.ros2` editor and Explorer | [Generates the node code](generate-and-build.md#generate-the-nodes-of-a-package) of a package. |
-| `rossdl.buildPackage` | ROSSDL: Build ROS 2 Package | Command Palette | [Builds](generate-and-build.md#build) with `colcon`. |
+| `rossdl.buildPackage` | ROSSDL: Build ROS 2 Package | Command Palette | An older command, [archived](../docu/old/RossdlBuildCommand.md). Build with `colcon` in a terminal, see [Build](generate-and-build.md#build). |
 | `rostooling.installAgentSkills` | RosTooling: Install AI Agent Skills & MCP | Command Palette | Sets up [agents](mcp-and-agents.md#setting-up-an-agent). |
 | `rostooling.selectServerJar` | RosTooling: Select Language Server JAR… | Command Palette | Chooses the language server JAR: the bundled one or your own. |
 | `rostooling.managePlugins` | RosTooling: Manage Plugins… | Command Palette, Plugins view | Enables and disables [plugins](plugins.md). |
@@ -53,4 +53,3 @@ The extension writes what it does to the output channel **ROS LSP** (View → Ou
 
 **A plugin is not loaded.** Select it in the **RosTooling Plugins** view and choose **Show Load Error**. The reasons are a JAR that has not been approved or has changed since you approved it, a JAR without plugin metadata, or a version that does not fit, see [Loading and trust](../docu/PluginLoading.md). In a workspace that you have not trusted, the plugin settings of the workspace are ignored.
 
-**The build command does not accept a folder.** The ROSSDL workspace must contain `src` and `install/setup.bash`: it must have been built before. The build workspace can be any ROS 2 workspace.

@@ -17,7 +17,12 @@ If the download fails, the standard ROS types may not resolve until you sync aga
 
 ## Browsing
 
-**Catalogue** in the toolbar of the Studio opens a drawer on the side. It has these tabs:
+**Catalogue** in the toolbar of the Studio opens the **RosTooling Model Catalogue**, a drawer on the side. Each entry shows the name, the package, where it comes from and how many interfaces it has, and an **Import** button. The tabs show how many entries they have. It has these tabs:
+
+```{image} images/studio-catalogue.png
+:alt: The catalogue drawer with the list of nodes
+:width: 100%
+```
 
 | Tab | Content | Where |
 | --- | --- | --- |
@@ -31,6 +36,11 @@ Choosing a node or subsystem adds it to your system. Models that come from the c
 ## Your own models
 
 Your workspace is part of the catalogue: the `.ros2`, `.ros` and `.rossystem` files in it are found in the same way. To use models from a place outside of the workspace, open the **Sources** tab and click **Add Custom Folder…**. The folder is indexed and its models appear in the other tabs. The **Custom Folders** list of the tab has a button for removing a folder again. The folders are saved in a configuration file in the catalogue storage.
+
+```{image} images/studio-catalogue-sources.png
+:alt: The Sources tab of the catalogue drawer
+:width: 100%
+```
 
 **Sync GitHub Catalogue** in the same tab updates the two repositories.
 

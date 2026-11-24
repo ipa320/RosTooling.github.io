@@ -4,13 +4,22 @@ Auto-connect proposes the connections between the nodes of a system, so that you
 
 ## Using it
 
-Click **Auto-connect** on the canvas of the System view. A dialog opens, with the nodes of the system in groups.
+Click **Auto-connect** on the canvas of the System view. A dialog opens, headed by the number of open receivers, with the nodes of the system in groups.
 
-- For every receiver port, the dialog has a list of candidate senders. Each candidate shows its rank and the evidence for it. At most one candidate is preselected, and only when the evidence is strong, see below. **Leave unconnected** is always an option.
-- A topic subscriber can take several publishers: add further publishers yourself. A service client or an action client connects to one server at a time.
-- For every sender the dialog shows how many connections it has, and how many it would have with your choices. A collapsible list shows the ports that were skipped, with the reason, for example an interface of a subsystem that has not been declared.
+![Choosing proposed connections and adding them](images/studio-autoconnect.gif)
+
+```{image} images/studio-autoconnect-full.png
+:alt: The Auto-connect dialog with the proposals for four receivers
+:width: 100%
+```
+
+- Each receiver port, a subscriber, a service client or an action client, has its own box with the kind of the port, its name and its type. In it, every candidate sender is a line with a radio button, the sender as `<node>::<interface>`, its rank on the right, and the evidence under it, for example "similar names 'scan' ~ 'scan_in' (1.00)". **Leave unconnected** is always an option.
+- At most one candidate is preselected, and only when the evidence is strong, see below.
+- A topic subscriber can take several publishers: under **add another publisher** a check box for each further candidate adds it. A service client or an action client connects to one server at a time.
+- **Show emitter fan-out** (or Hide) lists every sender with its type and the number of connections it has, as `existing + chosen here → total`.
+- A collapsible list shows the ports that were skipped, with the reason, for example an interface of a subsystem that has not been exposed.
 - When you hover over a candidate, the two ports are highlighted on the canvas.
-- **Apply** adds all chosen connections as one change, so one undo removes them all. The dialog then runs the proposal again and shows what has been added.
+- **Add N connections** adds all chosen connections as one change. A message says "Added N connections (Undo reverts the whole batch)", so one undo removes them all. The dialog stays open and lists the receivers that are still open.
 
 While the dialog is open it follows the model: after an undo, a redo or any other change, it refreshes and keeps the choices that you made.
 

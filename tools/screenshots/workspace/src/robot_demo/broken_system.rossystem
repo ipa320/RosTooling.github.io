@@ -1,0 +1,12 @@
+broken_system:
+  nodes:
+    "filter":
+      from: "scanner_pkg.scan_filter"
+      interfaces:
+        - "scan_filtered": pub-> "scan_filter::scan_filtered"
+    "planner":
+      from: "nav_pkg.planner"
+      interfaces:
+        - "obstacles_in": sub-> "planner::obstacles_in"
+  connections:
+    - ["scan_filtered", "obstacles_in"]

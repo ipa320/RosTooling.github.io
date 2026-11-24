@@ -1,0 +1,10 @@
+outer_system:
+  subSystems:
+    "robot_system"
+  nodes:
+    "operator":
+      from: "nav_pkg.planner"
+      interfaces:
+        - "obstacles_op": sub-> "planner::obstacles_in"
+  connections:
+    - ["robot_system::detector::obstacles", "obstacles_op"]

@@ -1,0 +1,21 @@
+nav_pkg:
+  artifacts:
+    obstacle_detector:
+      node: obstacle_detector
+      subscribers:
+        scan:
+          type: "sensor_msgs/msg/LaserScan"
+      publishers:
+        obstacles:
+          type: "std_msgs/msg/String"
+    planner:
+      node: planner
+      subscribers:
+        obstacles_in:
+          type: "std_msgs/msg/String"
+      publishers:
+        cmd_vel:
+          type: "geometry_msgs/msg/Twist"
+      serviceclients:
+        reset_filter:
+          type: "std_srvs/srv/Trigger"

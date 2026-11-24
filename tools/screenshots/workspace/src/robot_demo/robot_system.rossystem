@@ -1,0 +1,31 @@
+robot_system:
+  nodes:
+    "laser":
+      from: "scanner_pkg.laser_driver"
+      interfaces:
+        - "scan": pub-> "laser_driver::scan"
+    "filter":
+      from: "scanner_pkg.scan_filter"
+      interfaces:
+        - "scan_in": sub-> "scan_filter::scan_in"
+        - "scan_filtered": pub-> "scan_filter::scan_filtered"
+        - "reset": ss-> "scan_filter::reset"
+      parameters:
+        - "range_max": "scan_filter::range_max"
+          value: 12.0
+    "detector":
+      from: "nav_pkg.obstacle_detector"
+      interfaces:
+        - "scan_det": sub-> "obstacle_detector::scan"
+        - "obstacles": pub-> "obstacle_detector::obstacles"
+    "planner":
+      from: "nav_pkg.planner"
+      interfaces:
+        - "obstacles_in": sub-> "planner::obstacles_in"
+        - "cmd_vel": pub-> "planner::cmd_vel"
+        - "reset_filter": sc-> "planner::reset_filter"
+  connections:
+    - ["scan", "scan_in"]
+    - ["scan_filtered", "scan_det"]
+    - ["obstacles", "obstacles_in"]
+    - ["reset", "reset_filter"]

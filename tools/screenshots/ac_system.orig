@@ -1,0 +1,10 @@
+ac_system:
+  nodes:
+    "laser":
+      from: "scanner_pkg.laser_driver"
+    "filter":
+      from: "scanner_pkg.scan_filter"
+    "detector":
+      from: "nav_pkg.obstacle_detector"
+    "planner":
+      from: "nav_pkg.planner"
