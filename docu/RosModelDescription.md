@@ -56,8 +56,10 @@ structure_pkg:
 
 `fromGitRepo` takes the repository address, a colon and the branch. Each entry of `dependencies` is one of two forms:
 
-- the name of another package model, for a package that is described in the project or the catalogue, such as `base_pkg`;
-- `ExternalDependency <name>`, for a ROS package that has no model, such as `tf2_ros`.
+- the name of another package model, for a package that is described in the workspace or the catalogue, such as `std_msgs` or `base_pkg`;
+- `ExternalDependency <name>`, for a ROS package that has no model, such as `rclcpp`. A name without a model behind it is an error unless it is written this way.
+
+`dependencies:` comes after `artifacts:`; written before it, the file does not parse.
 
 Every entry is added as a `<depend>` entry to the generated `package.xml`.
 
