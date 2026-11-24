@@ -193,7 +193,7 @@ params_system:
 
 ### Parameters of the whole system
 
-`parameters:` directly under the system declares parameters of the system itself. Each one has a type and a `value:`, which is its starting value. In the generated launch file they become launch arguments, so the system can be configured when it is started: `ros2 launch <package> <system>.launch.py filter_rate:=30.0`.
+`parameters:` directly under the system declares parameters of the system itself. Each one has a type and a `value:`, which is its starting value. A `default:` on the type is used when there is no `value:`, but this needs a RosTooling version that is newer than the current release; until then write `value:`. In the generated launch file they become launch arguments, so the system can be configured when it is started: `ros2 launch <package> <system>.launch.py filter_rate:=30.0`.
 
 ### Launch substitutions
 

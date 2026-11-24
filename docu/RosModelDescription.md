@@ -57,7 +57,9 @@ structure_pkg:
 `fromGitRepo` takes the repository address, a colon and the branch. Each entry of `dependencies` is one of two forms:
 
 - the name of another package model, for a package that is described in the workspace or the catalogue, such as `std_msgs` or `base_pkg`;
-- `ExternalDependency <name>`, for a ROS package that has no model, such as `rclcpp`. A name without a model behind it is an error unless it is written this way.
+- `ExternalDependency <name>`, for a package that has no model, such as a system library or a ROS package that you do not model, for example `tf2_ros`. A name without a model behind it is an error unless it is written this way.
+
+`dependencies:` is for extra packages. The generator already adds `rclcpp`, `rclcpp_components`, `rclpy`, the lifecycle and action packages and the packages of the message types that the interfaces use, so do not list them.
 
 `dependencies:` comes after `artifacts:`; written before it, the file does not parse.
 

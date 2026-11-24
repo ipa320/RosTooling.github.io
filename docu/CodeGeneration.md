@@ -80,7 +80,7 @@ Every parameter value that the system sets for a node becomes a launch argument 
 ros2 launch demo_system demo_system.launch.py rate:=2.0
 ```
 
-A parameter that the system declares itself under `parameters:` is also a launch argument, and `$(var name)` in a [launch substitution](RosSystemModelDescription.md#launch-substitutions) refers to it. Give it its starting value with `value:`. A string value with a launch substitution is passed to the launch system as it is, and the generated code makes sure that it stays a string.
+A parameter that the system declares itself under `parameters:` is also a launch argument, and `$(var name)` in a [launch substitution](RosSystemModelDescription.md#launch-substitutions) refers to it. Give it its starting value with `value:`. (With a RosTooling version newer than the current release, a `default:` on its type is used when there is no `value:`.) A string value with a launch substitution is passed to the launch system as it is, and the generated code makes sure that it stays a string.
 
 ### Namespaces
 
