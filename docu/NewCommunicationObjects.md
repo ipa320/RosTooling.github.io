@@ -1,6 +1,56 @@
-# Messages, services and actions generator
+# Communication objects (.ros)
 
-###  Autogeneration tools  [![](images/Ros2_logo.png)]
+A communication object model describes the message, service and action types that nodes use for their interfaces. It uses the extension `.ros` and mirrors the `.msg`, `.srv` and `.action` files of ROS. Package models (`.ros1`, `.ros2`) refer to these types in the `type:` of an interface, and the validator checks that the type exists and that connected interfaces have the same type.
+
+You rarely have to write these models yourself. The types of the common ROS packages are in the [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) repository, which RosTooling downloads as the catalogue. You only need a `.ros` file for types that are specific to your own packages. A single `.ros` file can describe several packages one after the other, and every package in it can be looked up.
+
+## A model of your own types
+
+<!-- check: group=objects file=my_msgs.ros -->
+```text
+my_msgs:
+  msgs:
+    Hello
+      message
+        string text
+        int32 count
+  srvs:
+    Add
+      request
+        int32 a
+        int32 b
+      response
+        int32 sum
+  actions:
+    Count
+      goal
+        int32 target
+      result
+        int32 reached
+      feedback
+        int32 current
+```
+
+<!-- check: group=objects file=counter.ros2 -->
+```text
+counter:
+  artifacts:
+    counter:
+      node: counter
+      publishers:
+        hello:
+          type: "my_msgs/msg/Hello"
+      serviceservers:
+        add:
+          type: "my_msgs/srv/Add"
+      actionservers:
+        count:
+          type: "my_msgs/action/Count"
+```
+
+A type is referred to from a package model as `<package>/msg/<Name>`, `<package>/srv/<Name>` or `<package>/action/<Name>`.
+
+## Autogeneration tools  [![](images/Ros2_logo.png)]
 
 
 For the autogeneration of model objects we facilitate a bash:
