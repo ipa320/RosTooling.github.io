@@ -18,4 +18,6 @@ The server script is the one from the `ipa-rostooling-studio` repository. It nee
 
 `--include-skipped` runs the skipped groups too. Use it with a server that has the fix; the language server JAR can be chosen with the environment variable `ROSMODEL_JAR`.
 
+`plugin=<id>` marks a group that needs a RosTooling plugin. It runs only when the id is in `ROS_PLUGINS_ENABLED` and `ROS_PLUGINS_DIR` points to the approved JAR, for example the BehaviorTree plugin. `with=<folder>` adds the files of a folder of this repository to the group; `tools/fixtures/bt/` holds copies of the catalogue models of the BehaviorTree plugin.
+
 Not every language file can be checked this way: the server script reads `.ros`, `.ros2` and `.rossystem` files, so `.ros1` examples are not covered.

@@ -1,0 +1,33 @@
+bt_orchestrator:
+  artifacts:
+    bt_orchestrator:
+      node: bt_orchestrator
+      actionservers:
+        execute_tree:
+          type: "btcpp_ros2_interfaces/action/ExecuteTree"
+      serviceservers:
+        get_trees:
+          type: "btcpp_ros2_interfaces/srv/GetTrees"
+      parameters:
+        action_name:
+          type: String
+          value: "bt_execution"
+        tick_frequency:
+          type: Integer
+          value: 100
+        groot2_port:
+          type: Integer
+          value: 1667
+        "plugins":
+          type: Array [ String ]
+        ros_plugins_timeout:
+          type: Integer
+          value: 1000
+        behavior_trees:
+          type: Array [ String ]
+      pluginslots:
+        bt_leaves:
+          base: behaviortree_cpp.TreeNode
+          parameter: leaf_libraries
+          format: library
+          multiple: true

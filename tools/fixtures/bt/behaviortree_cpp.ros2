@@ -1,0 +1,6 @@
+behaviortree_cpp:
+  pluginbases:
+    TreeNode:
+      class: "BT::TreeNode"
+      header: "behaviortree_cpp/tree_node.h"
+      loader: bt

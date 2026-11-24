@@ -7,7 +7,10 @@ An example is a fenced code block preceded by an HTML comment:
 
 Blocks with the same group are written to one folder and validated together, so a
 .rossystem example can refer to the .ros2 example it needs. Without `expect`, a block
-must produce no ERROR and no WARNING. With `skip="<reason>"` the group is listed but not run (for a documented feature
+must produce no ERROR and no WARNING. With `plugin=<id>` the group needs that RosTooling plugin: it runs only when the id is in
+ROS_PLUGINS_ENABLED (and ROS_PLUGINS_DIR points to the approved JAR), else it is skipped.
+With `with=<folder>` the files of a folder of this repository are added to the group.
+With `skip="<reason>"` the group is listed but not run (for a documented feature
 that the shipped server does not accept yet; remove the attribute once it does).
 With `expect=<text>`, the group must produce a
 diagnostic that contains <text>, and the check fails if it does not (used for the
@@ -44,12 +47,16 @@ def collect():
             if "group" not in attrs or "file" not in attrs:
                 sys.exit(f"{rel}: a check comment needs group= and file=: {m.group('attrs')}")
             key = f"{rel}::{attrs['group']}"
-            g = groups.setdefault(key, {"files": {}, "expect": None, "skip": None})
+            g = groups.setdefault(key, {"files": {}, "expect": None, "skip": None, "plugin": None, "with": None})
             g["files"][attrs["file"]] = m.group("body") + "\n"
             if "expect" in attrs:
                 g["expect"] = attrs["expect"]
             if "skip" in attrs:
                 g["skip"] = attrs["skip"]
+            if "plugin" in attrs:
+                g["plugin"] = attrs["plugin"]
+            if "with" in attrs:
+                g["with"] = attrs["with"]
     return groups
 
 
@@ -85,9 +92,18 @@ def main():
                 print(f"skip {key} ({g['skip']})")
                 skipped += 1
                 continue
+            if g["plugin"] and g["plugin"] not in os.environ.get("ROS_PLUGINS_ENABLED", "").split(","):
+                print(f"skip {key} (plugin {g['plugin']} is not enabled; set ROS_PLUGINS_DIR and ROS_PLUGINS_ENABLED)")
+                skipped += 1
+                continue
             folder = Path(tmp) / re.sub(r"\W+", "_", key)
             folder.mkdir()
             paths = []
+            if g["with"]:
+                for extra in sorted((ROOT / g["with"]).iterdir()):
+                    if extra.name not in g["files"]:
+                        (folder / extra.name).write_text(extra.read_text(encoding="utf-8"), encoding="utf-8")
+                        paths.append(str(folder / extra.name))
             for name, body in g["files"].items():
                 (folder / name).write_text(body, encoding="utf-8")
                 paths.append(str(folder / name))

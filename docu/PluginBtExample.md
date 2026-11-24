@@ -33,7 +33,7 @@ Add the `catalogue/` folder of the plugin as a catalogue source, so that the ref
 
 The leaf declares the ROS 2 interface that it uses, and a `@bt` block that says what kind of leaf it is, which interface it wraps and which ports it has in the tree:
 
-<!-- check: group=btleaves file=behaviortree_cpp.ros2 skip="needs the BehaviorTree plugin to be enabled and approved" -->
+<!-- check: group=btleaves file=behaviortree_cpp.ros2 plugin=de.fraunhofer.ipa.ros.plugin.bt with=tools/fixtures/bt -->
 ```text
 behaviortree_cpp:
   pluginbases:
@@ -43,7 +43,7 @@ behaviortree_cpp:
       loader: bt
 ```
 
-<!-- check: group=btleaves file=bt_leaves.ros2 skip="needs the BehaviorTree plugin to be enabled and approved" -->
+<!-- check: group=btleaves file=bt_leaves.ros2 plugin=de.fraunhofer.ipa.ros.plugin.bt with=tools/fixtures/bt -->
 ```text
 bt_leaves:
   artifacts:
@@ -180,7 +180,7 @@ The plugin adds the port with the name of the action, service or topic to each l
 
 The plugin ships a ready node, `bt_orchestrator`, that executes behaviour trees with `BT::TreeExecutionServer`. Its model in the catalogue has a plugin slot for the leaves, which holds the leaf libraries. A system chooses the leaves, and RosTooling sets the parameter `leaf_libraries` in the launch file:
 
-<!-- check: group=btsystem file=bt_system.rossystem skip="needs the BehaviorTree plugin to be enabled and approved" -->
+<!-- check: group=btleaves file=bt_system.rossystem plugin=de.fraunhofer.ipa.ros.plugin.bt with=tools/fixtures/bt -->
 ```text
 bt_app_sys:
   nodes:
@@ -189,6 +189,8 @@ bt_app_sys:
       slots:
         bt_leaves: [bt_leaves.LookupTarget, bt_leaves.WaitReady]
 ```
+
+In the generated launch file the parameter is `"leaf_libraries": ["leaves"]`, the library of the artifact that holds the leaves.
 
 ## Tools
 
