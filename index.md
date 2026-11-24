@@ -144,3 +144,19 @@ docu/RosTooling_issues
 docu/eclipse_issues
 docu/Release
 ```
+
+```{toctree}
+:hidden:
+:caption: VS Code Extension
+
+vscode/overview
+vscode/getting-started
+vscode/editing-models
+vscode/studio
+vscode/auto-connect
+vscode/generate-and-build
+vscode/catalogue
+vscode/plugins
+vscode/mcp-and-agents
+vscode/reference
+```
