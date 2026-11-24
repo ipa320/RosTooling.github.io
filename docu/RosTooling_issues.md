@@ -14,8 +14,6 @@ This page lists what does not work as you might expect. Entries marked *fixed* s
 
 **Generated nodes have no start-up hook.** A node that has to do something when it starts, for example create a timer, has to do it in the code of the generated wrappers that you own. There is no model element for it yet.
 
-**Namespaced nodes and parameter files.** For a node with a namespace, the parameter file that the launch file loads can use the wrong key. A fix is in progress. Until it is released, check the generated `config` file of such a node.
-
 **`ros2 launch` and nodes that read the keyboard.** A node such as `turtle_teleop_key` needs a terminal and does not work when started from a launch file. Start it with `ros2 run` in its own terminal.
 
 **Features that need a newer RosTooling than the current release.** These features are described as working. The server of the current release rejects or ignores them, and the pages that describe them carry a note.
@@ -24,7 +22,8 @@ This page lists what does not work as you might expect. Entries marked *fixed* s
 - naming another package model in `dependencies:`, see [Packages](RosModelDescription.md),
 - arrays with a fixed size or an upper bound, see [Messages, services and actions](NewCommunicationObjects.md),
 - the `default:` of a system parameter, see [Systems](RosSystemModelDescription.md),
-- importing a node of the catalogue in the Studio, see [Catalogue](../vscode/catalogue.md).
+- importing a node of the catalogue in the Studio, see [Catalogue](../vscode/catalogue.md),
+- the parameter file of a node with a namespace, see [System generation](CodeGeneration.md).
 
 If a model with one of these is rejected as invalid, your RosTooling is older than the feature. See [What's new](WhatsNew.md) for the versions.
 

@@ -27,7 +27,7 @@ demo_system/
 | File | Content |
 | --- | --- |
 | `launch/<system>.launch.py` | The launch file. This is the part you use. |
-| `config/<node>.yaml` | The parameter values that the system model sets for a node, in the ROS 2 parameter file format. |
+| `config/<node>.yaml` | The parameter values that the system model sets for a node, in the ROS 2 parameter file format. For a node with a namespace the file is `config/<namespace>_<node>.yaml` and its top key is `/<namespace>/<node>`. |
 | `README.md` | The list of nodes and their connections, the commands to install the dependencies, build the workspace and start the launch file. |
 | `resource/<system>.puml` | A [PlantUML](https://plantuml.com/) description of the system, see [System visualization](SystemModelsVisualization.md). |
 | `package.xml`, `CMakeLists.txt` | The package: it depends on the packages of the nodes and on the launch packages, and installs the launch and config folders. |
@@ -84,7 +84,7 @@ A parameter that the system declares itself under `parameters:` is also a launch
 
 ### Namespaces
 
-A `namespace:` of a node in the model becomes the namespace of its action in the launch file.
+A `namespace:` of a node in the model becomes the namespace of its action in the launch file. When the node also has a parameter file, the file is named after the namespace and the node, for example `config/my_ns_node1.yaml` with the key `/my_ns/node1:`, and the launch file loads that file. A leading slash of the namespace is dropped and other slashes become `_` in the file name. This needs a RosTooling version that is newer than the current release. The current release writes a file that the launch file does not find.
 
 ### Processes
 
