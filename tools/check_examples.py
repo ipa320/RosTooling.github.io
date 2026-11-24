@@ -7,7 +7,9 @@ An example is a fenced code block preceded by an HTML comment:
 
 Blocks with the same group are written to one folder and validated together, so a
 .rossystem example can refer to the .ros2 example it needs. Without `expect`, a block
-must produce no ERROR and no WARNING. With `expect=<text>`, the group must produce a
+must produce no ERROR and no WARNING. With `skip="<reason>"` the group is listed but not run (for a documented feature
+that the shipped server does not accept yet; remove the attribute once it does).
+With `expect=<text>`, the group must produce a
 diagnostic that contains <text>, and the check fails if it does not (used for the
 examples that show an error on purpose).
 
@@ -42,10 +44,12 @@ def collect():
             if "group" not in attrs or "file" not in attrs:
                 sys.exit(f"{rel}: a check comment needs group= and file=: {m.group('attrs')}")
             key = f"{rel}::{attrs['group']}"
-            g = groups.setdefault(key, {"files": {}, "expect": None})
+            g = groups.setdefault(key, {"files": {}, "expect": None, "skip": None})
             g["files"][attrs["file"]] = m.group("body") + "\n"
             if "expect" in attrs:
                 g["expect"] = attrs["expect"]
+            if "skip" in attrs:
+                g["skip"] = attrs["skip"]
     return groups
 
 
@@ -73,8 +77,13 @@ def main():
     if not ok:
         sys.exit(f"language server not available: {reason}")
     failures = 0
+    skipped = 0
     with tempfile.TemporaryDirectory() as tmp:
         for key, g in groups.items():
+            if g["skip"]:
+                print(f"skip {key} ({g['skip']})")
+                skipped += 1
+                continue
             folder = Path(tmp) / re.sub(r"\W+", "_", key)
             folder.mkdir()
             paths = []
@@ -101,7 +110,7 @@ def main():
                 failures += 1
             else:
                 print(f"ok   {key}")
-    print(f"{len(groups)} example groups, {failures} failed")
+    print(f"{len(groups)} example groups, {failures} failed, {skipped} skipped")
     return 1 if failures else 0
 
 

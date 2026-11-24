@@ -15,7 +15,7 @@ source_suffix = {".md": "markdown"}
 root_doc = "index"
 
 # Not part of the site: tooling and archived build output.
-exclude_patterns = ["_build", ".github", ".venv", "venv", "README.md", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", ".github", "tools", ".venv", "venv", "README.md", "Thumbs.db", ".DS_Store"]
 
 # MyST: anchors for headings up to level 3, so links such as page.md#section work.
 myst_heading_anchors = 3

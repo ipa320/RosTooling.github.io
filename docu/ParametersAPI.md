@@ -10,7 +10,7 @@ Parameters are declared in a package model, on a node, and can be given new valu
 | `Integer` | a whole number | `42` |
 | `Double` | a number with a decimal point | `1.0` |
 | `String` | text in double quotes | `"hello"` |
-| `Base64` | binary data; the editor shows a hint for the format | |
+| `Base64` | binary data, written as `0b` followed by binary digits | `0b01000001` |
 | `List [T1, T2, ...]` | a list with a fixed number of elements, each of its own type | `[1, 1, "hello"]` |
 | `Array [T]` | a list of any length with elements of one type | `["a", "b", "c"]` |
 | `Struct [name T, ...]` | named members, each with its own type | `hello: 1` and `what: "test"` on separate lines |
@@ -101,6 +101,30 @@ params_system:
           value: [
             hello: 1
             what: "test"]
+```
+
+A binary value for a `Base64` parameter is written like this:
+
+<!-- check: group=base64 file=base64_pkg.ros2 skip="Base64 values are rejected by the server" -->
+```text
+base64_pkg:
+  artifacts:
+    coder:
+      node: coder
+      parameters:
+        payload:
+          type: Base64
+```
+
+<!-- check: group=base64 file=base64.rossystem skip="Base64 values are rejected by the server" -->
+```text
+base64_system:
+  nodes:
+    "coder":
+      from: "base64_pkg.coder"
+      parameters:
+        - "payload": "coder::payload"
+          value: 0b01000001
 ```
 
 A struct value is written in square brackets, with one `name: value` pair for each member on its own line, as in `test_st` above.

@@ -54,7 +54,29 @@ structure_pkg:
   dependencies: [ExternalDependency diagnostic_updater, ExternalDependency tf2_ros]
 ```
 
-`fromGitRepo` takes the repository address, a colon and the branch. Each entry of `dependencies` is written `ExternalDependency <name>` and names a ROS package the code needs. It is added as a `<depend>` entry to the generated `package.xml`.
+`fromGitRepo` takes the repository address, a colon and the branch. Each entry of `dependencies` is one of two forms:
+
+- the name of another package model, for a package that is described in the project or the catalogue, such as `base_pkg`;
+- `ExternalDependency <name>`, for a ROS package that has no model, such as `tf2_ros`.
+
+Every entry is added as a `<depend>` entry to the generated `package.xml`.
+
+<!-- check: group=dependency file=base_pkg.ros2 skip="package dependencies do not resolve yet" -->
+```text
+base_pkg:
+  artifacts:
+    base_node:
+      node: base_node
+```
+
+<!-- check: group=dependency file=app_pkg.ros2 skip="package dependencies do not resolve yet" -->
+```text
+app_pkg:
+  artifacts:
+    app_node:
+      node: app_node
+  dependencies: [base_pkg, ExternalDependency tf2_ros]
+```
 
 ### Naming rules
 
