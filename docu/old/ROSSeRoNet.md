@@ -1,3 +1,11 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 ## Connect ROS tooling models with SeRoNet
 
 ### Prerequisites

@@ -26,7 +26,7 @@ Once the installation is completed, go to *Help* > *Install New Software...*. To
 
 If no package is listed, please uncheck the option *Group items by category*. The category *ROS Model* appears in the *Name* area. Check the box in front of *ROS model* and click *Next* to review the list of items to be installed. Click *Next* again to read and accept the terms of the license agreements and afterwards click *Finish*. Eclipse will then start to install the ROS tooling and its dependencies. If you get a security warning about the authenticity, click OK. Finally, when asked, restart Eclipse to complete the installation process.
 
-To start using the ROS tooling continue with [step 1](Environment_setup.md/#1-switch-to-the-ros-developer-perspective)
+To start using the ROS tooling continue with [step 1](Environment_setup.md#switch-to-the-ros-developer-perspective)
 
 
 ## Alternative installations
@@ -62,4 +62,4 @@ By default, the ROS tooling installation will be saved under the folder *ros-mod
 
 Follow the installation instructions of the Oompth installer dialog, after the installation eclipse will be restarted to launch the ROS tooling configuration. Finally, when all the startup tasks are finished press "Workbench".
 
-To start using the ROS tooling continue with [step 0](Environment_setup.md/#0-start-the-ros-tooling-application)
+To start using the ROS tooling continue with [step 0](Environment_setup.md)

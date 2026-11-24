@@ -1,9 +1,17 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 ## How to get deployment artifacts
 
 
 ### Preparation
 
-Please be sure that the tool is installed and your workspace setup, see the [installation guide](../README.md) for further details.
+Please be sure that the tool is installed and your workspace setup, see the [installation guide](../../index.md) for further details.
 
 Import the example project pub_sub_ros2 (from the [ros-model-examples](https://github.com/ipa-nhg/ros-model-examples) repository) to the workbench of your application:
 

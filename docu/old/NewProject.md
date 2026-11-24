@@ -1,6 +1,14 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 ## Create a new ROS project and describe a node
 
-Please be sure that the tool is installed and your workspace setup, see the [installation guide](../README.md) for further details.
+Please be sure that the tool is installed and your workspace setup, see the [installation guide](../../index.md) for further details.
 
 To create a new project you have to press the button "Add new Ros Project"
 

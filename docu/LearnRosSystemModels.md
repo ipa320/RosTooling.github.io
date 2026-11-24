@@ -39,7 +39,7 @@ This model is basically creating a system composed of two nodes. While saving th
 
 ![alt text](images/launchstructure_01.png)
 
-The CMakeLists.txt and package.xml list the required dependencies and tags to compile the package. Then under launch the python file starts both nodes. See the [Code generator review tutorial](docu/CodeGeneration.md) for further details.
+The CMakeLists.txt and package.xml list the required dependencies and tags to compile the package. Then under launch the python file starts both nodes. See the [Code generator review tutorial](CodeGeneration.md) for further details.
 
 Now, we want to expose the ports to be connected. For that, we have to define the interfaces under the nodes. And again we have to reference the created interfaces, with the grammar **NodeName::InterfaceName**. Although in ROS all the interfaces will be automatically exposed, the RosSystem model requires this step to clearly design the system and the ports that are intentionally opened by the architect of the system.
 

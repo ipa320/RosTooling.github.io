@@ -1,3 +1,11 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 # Introspection at design time
 
 In ROS, when executing a launch file that defines several nodes, the connections will be automatically created by the rosmaster. To "simulate" this behaviour, the tooling infrastructure offers a button that creates the connections that will be wired automatically at runtime, that means: all interfaces with the same name and the same message (communication object) type.

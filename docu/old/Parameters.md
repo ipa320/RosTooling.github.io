@@ -1,3 +1,11 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 ## Parameters API
 
 The types of parameters supported by the ROS tooling are the following:

@@ -1,3 +1,11 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived and may be out of date.
+:::
+
 ## Compare your model with a Specification
 
 If you want to check that the model of your node is following a concrete specification of a driver, you can use our tool.

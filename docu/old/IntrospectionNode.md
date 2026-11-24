@@ -1,6 +1,14 @@
+---
+orphan: true
+---
+
+:::{warning}
+This page is archived. It was replaced by [Extract component models using introspection at runtime](../ros2model.md).
+:::
+
 ## Create a ROS model from a deployed robot using our introspection at runtime tool (for ROS 2 systems)
 
-Please be sure that the tool is installed and your workspace setup, see the [installation guide](../README.md) for further details.
+Please be sure that the tool is installed and your workspace setup, see the [installation guide](../../index.md) for further details.
 
 The tools documented here were conceived as a simple way to obtain models of systems already developed during their execution. This series of scripts uses the popular ROS rosgraph library to obtain a list of the interfaces present in the system at runtime.
 
