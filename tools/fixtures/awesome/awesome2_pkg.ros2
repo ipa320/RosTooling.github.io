@@ -1,0 +1,10 @@
+awesome2_pkg:
+  artifacts:
+    awesome2:
+      node: awesome2_node
+      subscribers:
+        awesome2_sub:
+          type: "std_msgs/msg/String"
+      parameters:
+        awesome2_string_param:
+          type: String

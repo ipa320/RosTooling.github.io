@@ -114,6 +114,8 @@ The logic class also has the functions that most nodes need, without using ROS 2
 | `validate_parameter(name, value)` | accept or reject a parameter change that arrives at run time |
 | `on_parameter_changed(name, value)` | react to a parameter that has changed |
 
+The logic class has no start-up method. The node hands the logic its platform functions, the timer factory first, when it starts, so a node that has to start work by itself, such as a publisher with a timer, creates its timer in `set_timer_factory`, as in the [publisher and subscriber tutorial](Example_PubSub.md#4-write-the-logic). A lifecycle node starts its work in `on_activate`.
+
 In a unit test these functions are not connected to ROS 2. Calling `ok`, `shutdown`, `now` or `sleep_for` without a test replacement raises an error, so a test cannot silently run against the wrong clock.
 
 ### Lifecycle nodes

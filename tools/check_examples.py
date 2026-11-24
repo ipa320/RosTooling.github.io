@@ -71,9 +71,12 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--server", default=os.environ.get("ROSTOOLING_SERVER_SCRIPT"))
     ap.add_argument("--list", action="store_true", help="only list the examples found")
+    ap.add_argument("--only", help="run only the groups whose key contains this text, for example a page name")
     ap.add_argument("--include-skipped", action="store_true", help="also run the groups marked skip=")
     args = ap.parse_args()
     groups = collect()
+    if args.only:
+        groups = {k: v for k, v in groups.items() if args.only in k}
     if args.list:
         for key, g in groups.items():
             print(key, sorted(g["files"]), "expect=" + g["expect"] if g["expect"] else "")

@@ -1,142 +1,139 @@
-## Hands-on example for the Turtlesim node [![](images/Ros2_logo.png)]
+# Tutorial: turtlesim
 
-To learn ROS one of the first tutorials that everyone does is turtlesim.
+One of the first ROS tutorials is turtlesim, a small window with a turtle that moves with velocity commands ([official tutorial](https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)). Here it is the example for modelling nodes that already exist. A system of two nodes is built, the turtle and the node that sends it commands from the keyboard, and the launch file is generated. It takes about 20 minutes and needs a ROS 2 installation with turtlesim (the commands use Jazzy).
 
-Basically, it is a small graphical interface where a turtle can be moved using the speed commands of any robotic base in ROS. [Official TurtleSim tutorial](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
+**What you need:** the [VS Code extension](../vscode/overview.md), and the syntax from the tutorials about [package models](LearnRosModels.md) and [system models](LearnRosSystemModels.md).
 
-We will use it as an example to show the models. Let's imagine that we want to create a system in which we have two nodes, one of them is the turtlesim and the other is the node to teleoperate it.
-The first thing we need to do is to create the models for both components. Both nodes are implemented in the [turtlesim](https://github.com/ros/ros_tutorials/tree/humble/turtlesim) package in the [ros_tutorials](https://github.com/ros/ros_tutorials/tree/humble) repository.
+## 1. Model the nodes
 
-We can create the component models manually or use our static code [analysis tools](https://github.com/ipa320/ros-model-extractors) to get them automatically. Using the second method we obtained the following models.
+Both nodes are in the package `turtlesim` of the repository [ros_tutorials](https://github.com/ros/ros_tutorials). A model of an existing node describes what the node offers. You can write it by hand from the documentation of the node, as here, or extract it from the code, see [Static code analysis](StaticCodeAnalyis.md).
 
-```
+Create a folder, open it in VS Code and create `turtlesim.ros2`:
+
+<!-- check: group=turtle file=turtlesim.ros2 -->
+```text
 turtlesim:
-  fromGitRepo: "https://github.com/ros/ros_tutorials/"
+  fromGitRepo: "https://github.com/ros/ros_tutorials.git:jazzy"
   artifacts:
     turtle_teleop_key:
-        node: turtle_teleop_key
-        publishers:
-          cmd_vel:
-            type: "geometry_msgs/msg/Twist"
-        parameters:
-          scale_angular:
-            type: Double
-            default: 2.0
-          scale_linear:
-            type: Double
-            default: 2.0
+      node: turtle_teleop_key
+      publishers:
+        "turtle1/cmd_vel":
+          type: "geometry_msgs/msg/Twist"
+      parameters:
+        scale_angular:
+          type: Double
+          default: 2.0
+        scale_linear:
+          type: Double
+          default: 2.0
     turtlesim_node:
       node: turtlesim_node
       publishers:
-        color_sensor:
+        "turtle1/color_sensor":
           type: "turtlesim/msg/Color"
-        pose:
+        "turtle1/pose":
           type: "turtlesim/msg/Pose"
       subscribers:
-        cmd_vel:
+        "turtle1/cmd_vel":
           type: "geometry_msgs/msg/Twist"
       serviceservers:
-        teleport_absolute:
-          type: "turtlesim/srv/TeleportAbsolute"
-        spawn:
-          type: 'turtlesim/srv/Spawn'
-        set_pen:
-          type: 'turtlesim/srv/SetPen'
-        reset:
+        clear:
           type: "std_srvs/srv/Empty"
         kill:
-          type: 'turtlesim/srv/Kill'
-        teleport_relative:
-          type: 'turtlesim/srv/TeleportRelative'
-        clear:
-          type: 'std_srvs/srv/Empty'
+          type: "turtlesim/srv/Kill"
+        reset:
+          type: "std_srvs/srv/Empty"
+        spawn:
+          type: "turtlesim/srv/Spawn"
+        "turtle1/set_pen":
+          type: "turtlesim/srv/SetPen"
+        "turtle1/teleport_absolute":
+          type: "turtlesim/srv/TeleportAbsolute"
+        "turtle1/teleport_relative":
+          type: "turtlesim/srv/TeleportRelative"
 ```
 
-To import this as a project in the RosTooling you can create a new modeling project. This can be done by pressing the icon "Add new ROS Project".
+The names of the interfaces are the names that the code uses, `turtle1/cmd_vel` and so on. A name with a slash is written in double quotes. The artifacts are named like the executables of the package, `turtlesim_node` and `turtle_teleop_key`, because the launch file starts the executables by these names. `fromGitRepo` is the repository of the source code, a colon and the branch.
 
-![alt text](images/create_new_RosProject.png)
+Right-click the file and choose **Open in RosTooling Visual Studio** to see the two nodes as forms:
 
-If the button doesn't work you can also create it manually using the Eclipse menu File -> New -> Other.. and searching for "Ros Model Project".
-
-![alt text](images/first_project_tutorial.gif)
-
-By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty. This can be removed for this case.
-
-Once the project is created, you can create a new file my File -> New -> Other -> File. We recommend giving as name to the file the name of the package and it must have the extension .ros2, this means the new file should be called **turtlesim.ros2**. By creating a file type .ros2, Eclipse will convert the project to an Xtext project. Then copy the previous model content to the new file.
-
-Now that we have already the components we can compose them. For that, we have to create a new .rossystem file. Again go to File -> New -> Other -> File. The new file must have an extension .rossystem.
-
-In [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you to write the model properly.
-
-The first that must be given is a name and then a ":" is required. In the next line, you must add indentation and you can press the keys "Ctrl" + Space bar for help. 
-Firstly, we will add the 2 nodes that compose our system.
-
-![alt text](images/turtlesim_tutorial1.gif)
-
-So far our file looks like this:
+```{image} images/tut_turtlesim_component.png
+:alt: The turtlesim package in the Component view
+:width: 100%
 ```
+
+## 2. Compose the system
+
+A system of the two nodes, with the interfaces that are to be connected, the subscription to the velocity commands of the turtle and the publication of the keyboard node. Create `turtlesim_system.rossystem`:
+
+<!-- check: group=turtle file=turtlesim_system.rossystem -->
+```text
 turtlesim_system:
   nodes:
-    turtlesim:
-      from: "turtlesim.turtlesim_node"
-    key_teleop:
-      from: "turtlesim.turtle_teleop_key"
-```
-
-The "from" attributes are references to the previous **turtlesim.ros2** file nodes. If you change the name of them, the references must also be updated.
-
-Now, we want to expose the ports to be connected. This means the subscriber of the velocity command of the turtle and the publisher from the keyboard teleop:
-
-![alt text](images/turtlesim_tutorial2.gif)
-
-And the model is updated to:
-```
-turtlesim_system:
-  nodes:
-    turtlesim:
+    "turtlesim":
       from: "turtlesim.turtlesim_node"
       interfaces:
-        - cmd_subscriber: sub-> "turtlesim_node::cmd_vel"
-    key_teleop:
+        - "cmd_subscriber": sub-> "turtlesim_node::turtle1/cmd_vel"
+    "key_teleop":
       from: "turtlesim.turtle_teleop_key"
       interfaces:
-        - cmd_publisher: pub-> "turtle_teleop_key::cmd_vel"
-```
-
-Again, the interfaces are references to the ones already defined in the **turtlesim.ros2** file. In ROS terms, we can only create instantiate topics that are described on my original ROS code (cpp or python).
-
-The last step is to create a connection between the two components. 
-
-![alt text](images/turtlesim_tutorial3.gif)
-
-And the model is updated to:
-```
-turtlesim_system:
-  nodes:
-    turtlesim:
-      from: "turtlesim.turtlesim_node"
-      interfaces:
-        - cmd_subscriber: sub-> "turtlesim_node::cmd_vel"
-    key_teleop:
-      from: "turtlesim.turtle_teleop_key"
-      interfaces:
-        - cmd_publisher: pub-> "turtle_teleop_key::cmd_vel"
+        - "cmd_publisher": pub-> "turtle_teleop_key::turtle1/cmd_vel"
   connections:
-   -[ cmd_publisher , cmd_subscriber]
+    - ["cmd_publisher", "cmd_subscriber"]
 ```
 
-If you save (Ctrl+S) after the last modifications a new folder "src-gen" will be automatically created. This folder contains a ROS 2 package ready to be executed with a launch file to start the designed system.
+The `from:` entries refer to the nodes of `turtlesim.ros2`, in the form `<package>.<node>`. The interfaces refer to the ones of the model, `<artifact>::<interface>`. A system can only use interfaces that the original code has.
 
-For a quick check, if you source a valid ROS installation and call the launch command the turtlesim example will be launched:
-
-```
-source /opt/ros/ROSDISTRO/setup.bash
-ros2 launch PATH_TO_LAUNCH_PY_FILE
+```{image} images/tut_turtlesim_system.png
+:alt: The turtlesim system in RosTooling Studio
+:width: 100%
 ```
 
-Using the terminal of the keyboard node you can use the arrows to send new commands to the turtle. 
+## 3. Generate and launch
 
-![alt text](images/turtlesim_tutorial4.gif)
+Right-click `turtlesim_system.rossystem` and choose **Generate ROS2 Package**. The package `turtlesim_system` is written to `src-gen/`. Its launch file starts both nodes and connects them with a remapping of the topic of both to the label of the connection:
 
+```python
+  turtlesim = Node(
+    package="turtlesim",
+    executable="turtlesim_node",
+    output='screen',
+    name="turtlesim",
+    remappings=[
+      ("turtle1/cmd_vel", "cmd_publisher")]
+  )
+  key_teleop = Node(
+    package="turtlesim",
+    executable="turtle_teleop_key",
+    output='screen',
+    name="key_teleop",
+    remappings=[
+      ("turtle1/cmd_vel", "cmd_publisher")]
+  )
+```
 
-The autogenerated README file of the package will show you how to create the new workspace and call the launch file.
+The nodes are in the installed package `turtlesim`, so the generated package only has to be built. Copy or link `src-gen/turtlesim_system` into a workspace and run:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+cd <workspace>
+colcon build --symlink-install
+source install/setup.bash
+ros2 launch turtlesim_system turtlesim_system.launch.py
+```
+
+The turtle window opens. The keyboard node reads the arrow keys from the terminal, which a launch file does not provide, so it stops with the message "Failed to get old console mode" when you start the system this way. Start it in a terminal of its own, with the same topic name:
+
+```bash
+ros2 run turtlesim turtle_teleop_key --ros-args -r turtle1/cmd_vel:=cmd_publisher
+```
+
+With the cursor keys in that terminal the turtle moves. You can also send a command by hand and watch the turtle change its position:
+
+```bash
+ros2 topic pub --once /cmd_publisher geometry_msgs/msg/Twist "{linear: {x: 2.0}}"
+ros2 topic echo /turtle1/pose --once
+```
+
+The README of the generated package has the commands to create the workspace and call the launch file.

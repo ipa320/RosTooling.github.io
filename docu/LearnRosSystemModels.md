@@ -1,190 +1,231 @@
-# Review models and the use of the textual editors for Ros Systems
+# Review system models
 
-To complete this tutorial the project "de.fraunhofer.ipa.ros.communication.objects" must be imported. See instructions under [setup](Environment_setup.md). If the automatic clone doesn't work for you, please clone the repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) manually and import it to your Eclipse workspace.
+A system model, `.rossystem`, composes nodes and connects them. In this tutorial you build one step by step, with the help and the error messages of the editor, and then look at what is generated from it. It takes about 20 minutes.
 
-The first step is to create a new Project to contain the examples, in case you completed the previous [tutorials](LearnRosModels.md) you can just use the same package. Otherwise, as usual you can create a new project by pressing the icon "Add new ROS Project".
+**What you need:** the [VS Code extension](../vscode/overview.md), and the knowledge of the [previous tutorial](LearnRosModels.md). The reference for the language is [System language](RosSystemModelDescription.md).
 
-![alt text](images/create_new_RosProject.png)
+## 1. The nodes to compose
 
-If the button doesn't work you can also create it manually using the Eclipse menu File -> New -> Other.. and searching for "Ros Model Project".
+A system needs package models for its nodes. Create two files, `awesome_pkg.ros2` and `awesome2_pkg.ros2`. The first node has two publishers with different types and one parameter of each type, the second has a subscriber and a string parameter. They describe invented nodes, as every part of this tutorial.
 
-![alt text](images/first_project_tutorial.gif)
-
-By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty. The folder "rosnodes" can be removed for this example.
-
-As a system creation requires component models, you can use existing .ros2 files for the composition. Under "de.fraunhofer.ipa.ros.communication.objects/BasicSpecs/Components" you can find the **ros_component_template.ros2** and the **ros_component2_template.ros2** files. Both represent fictitious nodes with all the possible interfaces and parameters. Please open both files and take a look at them. 
-
-Now we have to create a file to contain our system model. For that, you can go to File -> New -> Other -> General -> File. The new file must have the extension .rossystem.
-
-As reference, in [RosSystem description](RosSystemModelDescription.md) we explain the format of a system and the editor will support you in writing the model properly.
-
-The first that must be given is a name and then a ":" is required. In the next line, you must add indentation and you can press the keys "Ctrl" + Space bar for help. 
-Then we will define the nodes that compose the system. Here under "from" we will link the previous referenced nodes, the grammar for the references is **PackageName.NodeName**.
-
-![alt text](images/01_learn_rossystemmodels.gif)
-
-
-So far our file looks like this:
-
+<!-- check: group=pkgs file=awesome_pkg.ros2 -->
+```text
+awesome_pkg:
+  artifacts:
+    awesome:
+      node: awesome_node
+      publishers:
+        awesome_pub:
+          type: "std_msgs/msg/String"
+        hello_world_pub:
+          type: "std_msgs/msg/Int32"
+      parameters:
+        awesome_array_param:
+          type: Array [String]
+        awesome_bool_param:
+          type: Boolean
+        awesome_double_param:
+          type: Double
+        awesome_integer_param:
+          type: Integer
+        awesome_string_param:
+          type: String
+        awesome_struct_param:
+          type: Struct [first Integer, second Boolean]
 ```
+
+<!-- check: group=pkgs file=awesome2_pkg.ros2 -->
+```text
+awesome2_pkg:
+  artifacts:
+    awesome2:
+      node: awesome2_node
+      subscribers:
+        awesome2_sub:
+          type: "std_msgs/msg/String"
+      parameters:
+        awesome2_string_param:
+          type: String
+```
+
+## 2. Create the system file
+
+::::{tab-set}
+:::{tab-item} VS Code
+Create a file named `my_awesome_system.rossystem` in the same folder. The first line of the file is the name of the system, followed by a colon. On the next line, indent, and press `Ctrl+Space` to see what is allowed.
+:::
+:::{tab-item} Eclipse
+Use **File → New → Other → General → File**, and give the file the extension `.rossystem`.
+:::
+::::
+
+## 3. Add the nodes
+
+Under `nodes:` every node gets a label and a `from:`, which refers to the package model and the node in it, written `<package>.<node>`:
+
+<!-- check: group=s1 file=my_awesome_system.rossystem with=tools/fixtures/awesome -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
 ```
 
-This model is basically creating a system composed of two nodes. While saving the model automatically a folder "src-gen" will be created. The folder contains a new ROS package whose structure corresponds to a python launch package. 
+This is already a valid system of two nodes. Generate its package with **Generate ROS 2 Package** (in Eclipse the package is generated when you save the file). The result is in `src-gen/my_awesome_system/`, see [System generation](CodeGeneration.md): a launch file that starts both nodes, and the files to build it.
 
-![alt text](images/launchstructure_01.png)
+## 4. Expose the interfaces
 
-The CMakeLists.txt and package.xml list the required dependencies and tags to compile the package. Then under launch the python file starts both nodes. See the [Code generator review tutorial](CodeGeneration.md) for further details.
+A node has all the interfaces of its package model, but a system lists the ones that it uses on purpose, so that the architect of the system decides which ports are part of the design. Under `interfaces:` every entry has a label, an arrow for the kind of interface, and the reference `<artifact>::<interface>`:
 
-Now, we want to expose the ports to be connected. For that, we have to define the interfaces under the nodes. And again we have to reference the created interfaces, with the grammar **NodeName::InterfaceName**. Although in ROS all the interfaces will be automatically exposed, the RosSystem model requires this step to clearly design the system and the ports that are intentionally opened by the architect of the system.
-
-![alt text](images/02_learn_rossystemmodels.gif)
-
-```
+<!-- check: group=s2 file=my_awesome_system.rossystem with=tools/fixtures/awesome -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+        - "my_pub": pub-> "awesome::awesome_pub"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
       interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
+        - "my_sub": sub-> "awesome2::awesome2_sub"
 ```
 
-The next step is to create a connection between the two components. For that, we will use the connections attribute, under the system description. The connections must be made between interface instances described within the models, otherwise, the model validator will give an error.
+## 5. Connect the nodes
 
-![alt text](images/03_learn_rossystemmodels.gif)
+A connection joins a publisher to a subscriber of the same type. It refers to the labels:
 
-
-Currently, our model looks like this:
-
-```
+<!-- check: group=s3 file=my_awesome_system.rossystem with=tools/fixtures/awesome -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+        - "my_pub": pub-> "awesome::awesome_pub"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
       interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
+        - "my_sub": sub-> "awesome2::awesome2_sub"
   connections:
-   - [ my_pub, my_sub ]
-   ```
-
-We invite you to try different combinations and debug the validator for connections. For example:
-
+    - ["my_pub", "my_sub"]
 ```
+
+In the diagram of the Studio the same system looks like this:
+
+```{image} images/tut_system_connected.png
+:alt: The system with two nodes and one connection in RosTooling Studio
+:width: 100%
+```
+
+### When a connection is wrong
+
+Try to connect ports that do not fit. Here the publisher `int_pub` has the type `std_msgs/msg/Int32` and the subscriber has `std_msgs/msg/String`:
+
+<!-- check: group=s4 file=my_awesome_system.rossystem with=tools/fixtures/awesome expect="have different types" -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-        - string_pub: pub-> "awesome::hello_world_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+        - "my_pub": pub-> "awesome::awesome_pub"
+        - "int_pub": pub-> "awesome::hello_world_pub"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
       interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
-    
+        - "my_sub": sub-> "awesome2::awesome2_sub"
   connections:
-   - [string_pub, my_sub]
+    - ["int_pub", "my_sub"]
 ```
 
-This file will give a compilation error, and therefore the launch file will not be generated, because you are trying to connect ports with a different message type. The same will happen in case we try to connect different types of ports, like a topic with a service.
+The validator reports "A connection can only be formed by interfaces with the same type", and no launch file is generated while the error is there. The same happens when you connect different kinds of ports, such as a topic with a service.
 
-Also, another attribute that can be set and the generator will take into account is the namespace:
+## 6. Namespaces and parameters
 
-![alt text](images/04_learn_rossystemmodels.gif)
+A node can have a namespace, and the system can set the values of the parameters of its nodes. The reference to a parameter is `<artifact>::<parameter>`, and `value:` follows on the next line:
 
-Lastly, we can check the set of parameter values. A valid example of this would be:
-
-```
+<!-- check: group=s5 file=my_awesome_system.rossystem with=tools/fixtures/awesome -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       namespace: "my_ns"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+        - "my_pub": pub-> "awesome::awesome_pub"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
       interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
+        - "my_sub": sub-> "awesome2::awesome2_sub"
       parameters:
-        - string_example: "awesome2::awesome2_string_param"
+        - "string_example": "awesome2::awesome2_string_param"
           value: "hello"
   connections:
-   - [ my_pub, my_sub ]
+    - ["my_pub", "my_sub"]
 ```
 
-![alt text](images/05_learn_rossystemmodels.gif)
+The value must fit the type of the parameter. A number for a string parameter is an error:
 
-Where we give a string value to the parameter "awesome2_string_param". In case we try to give a wrong value, for example:
-
-```
+<!-- check: group=s6 file=my_awesome_system.rossystem with=tools/fixtures/awesome expect="Mismatched input" -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       namespace: "my_ns"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
+        - "my_pub": pub-> "awesome::awesome_pub"
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
       interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
+        - "my_sub": sub-> "awesome2::awesome2_sub"
       parameters:
-        - string_example: "awesome2::awesome2_string_param"
+        - "string_example": "awesome2::awesome2_string_param"
           value: 5
   connections:
-   - [ my_pub, my_sub ]
+    - ["my_pub", "my_sub"]
 ```
 
-The compiler will give an error of mismatched type. 
-![](images/Attention.png) The validator has some parts not fully implemented, check the [Known issues](RosTooling_issues.md) site in case you have problems by following this tutorial.
+The message is "Mismatched input ParameterInteger expecting ParameterStringType". See [Parameters](ParametersAPI.md) for all types and their values.
 
-Another feature included as part of the code generator is the generator of parameter files. This will be automatically done and the launch file will by default load it by the set of more than 5 parameters, for example for this case:
+## 7. Parameters of all types
 
-```
+All types of values together, a list, a boolean, a double, an integer, a string and a struct:
+
+<!-- check: group=s7 file=my_awesome_system.rossystem with=tools/fixtures/awesome -->
+```text
 my_awesome_system:
   nodes:
-    node1:
-      from: "my_awesome_pkg.awesome_node"
-      namespace: "my_ns"
+    "node1":
+      from: "awesome_pkg.awesome_node"
       interfaces:
-        - my_pub: pub-> "awesome::awesome_pub"
-    node2:
-      from: "my_awesome2_pkg.awesome2_node"
-      interfaces:
-        - my_sub: sub-> "awesome2::awesome2_sub"
+        - "my_pub": pub-> "awesome::awesome_pub"
       parameters:
-        - array_example: "awesome::awesome_array_param"
+        - "array_example": "awesome::awesome_array_param"
           value: ["hello", "hallo"]
-        - bool_example: "awesome::awesome_bool_param"
+        - "bool_example": "awesome::awesome_bool_param"
           value: true
-        - double_example: "awesome::awesome_double_param"
+        - "double_example": "awesome::awesome_double_param"
           value: 1.2
-        - integer_example : "awesome::awesome_integer_param"
+        - "integer_example": "awesome::awesome_integer_param"
           value: 2
-        - string_param : "awesome::awesome_string_param"
+        - "string_example": "awesome::awesome_string_param"
           value: "hallo"
-        - struct_param: "awesome::awesome_struct_param"
+        - "struct_example": "awesome::awesome_struct_param"
           value: [
             first: 2
             second: true]
+    "node2":
+      from: "awesome2_pkg.awesome2_node"
+      interfaces:
+        - "my_sub": sub-> "awesome2::awesome2_sub"
   connections:
-   - [ my_pub, my_sub ]
+    - ["my_pub", "my_sub"]
 ```
 
-In this case, a new file will be created under "src-gen/PackageName/config/" and it will contain the configuration of the node2. The launch file will be adapted to launch the configuration from a file.
+For every node with parameters the generator writes a parameter file, `config/<node>.yaml`, in the generated package. How the launch file uses the values depends on the node. A node with up to five parameters, none of them a struct, gets them as launch arguments, so they can be changed when the system starts: `ros2 launch my_awesome_system my_awesome_system.launch.py string_example:=hi`. A node with more than five parameters, or with a struct value, as in this example, has its launch file load the parameter file instead, which is easier to read for many values.
 
-With this very basic example, we hope you have understood how the models can be used and what kind of attributes they allow to represent.
+With this example you have used the main parts of the language. The next tutorial adds [subsystems](LearnRosSystemModels2.md).

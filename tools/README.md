@@ -14,7 +14,7 @@ Blocks with the same `group` are written to one folder and validated together (a
 python3 tools/check_examples.py --server /path/to/ipa-rostooling-studio/scripts/ros_server.py
 ```
 
-The server script is the one from the `ipa-rostooling-studio` repository. It needs Java 21 and finds a RosTooling language server JAR (for example the one built into the VS Code extension). `ROSTOOLING_SERVER_SCRIPT` can be set instead of `--server`. `--list` prints the examples that were found without running them.
+The server script is the one from the `ipa-rostooling-studio` repository. It needs Java 21 and finds a RosTooling language server JAR (for example the one built into the VS Code extension). `ROSTOOLING_SERVER_SCRIPT` can be set instead of `--server`. `--only <text>` runs only the groups whose key contains the text, for example a page name; a whole run takes several minutes, because every group starts the server. The tutorial `MobileBase_beginner.md` uses the models of the catalogue (RosModelsCatalog), which must be in `~/.rostooling/catalogue_repos`. `--list` prints the examples that were found without running them.
 
 `--include-skipped` runs the skipped groups too. Use it with a server that has the fix; the language server JAR can be chosen with the environment variable `ROSMODEL_JAR`.
 

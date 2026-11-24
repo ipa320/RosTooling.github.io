@@ -1,176 +1,120 @@
-## Hands-on example using common ROS systems (beginner) [![](images/Ros2_logo.png)]
+# Tutorial: compose an existing system, the turtlebot in simulation
 
-The execution part of this tutorial will only work for people with a local ROS 2 installation.
+In this tutorial you compose systems from models of the catalogue: the turtlebot3 in the Gazebo simulation, a keyboard node to drive it, and the cartographer node to build a map. You do not write any node models, only systems. It takes about 30 minutes. The models and the generation are checked; the execution needs a ROS 2 installation with Gazebo and the turtlebot3 packages, which is not part of this tutorial's checks.
 
-In this tutorial, we are going to see how you can compose existing systems or add a new component to them. For this, we will use the turtlebot in simulation.
+**What you need:** the [VS Code extension](../vscode/overview.md), which downloads the [catalogue](../vscode/catalogue.md) of models, and the tutorials about [system models](LearnRosSystemModels.md) and [subsystems](LearnRosSystemModels2.md).
 
-First of all, we need the turtlebot model, this and other models are available in our catalog of components and subsystems. The catalog is publicly available on GitHub [ipa-nhg/RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog).
+## 1. The turtlebot model
 
-Please clone the repository and import it to your Eclipse workspace. This can be easily done by File -> Import -> General -> Existing Projects into Workspace. Then select the container folder of the cloned repository.
+The catalogue [RosModelsCatalog](https://github.com/ipa-nhg/RosModelsCatalog) has the system `turtlebot_gazebo` in `robots/turtlebot3/simulation/turtlebot_gazebo.rossystem`. It describes the nodes that the [launch file of the package turtlebot3_gazebo](https://github.com/ROBOTIS-GIT/turtlebot3_simulations/tree/main/turtlebot3_gazebo/launch) starts, and starts the system through that launch file:
 
-![alt text](images/01_mobile_base_b.gif)
-
-For this tutorial, we will use the gazebo subsystem. The model is available under **RosModelsCatalog/robots/turtlebot3/simulation/turtlebot_gazebo.rossystem**. This model summarizes the set of nodes that are started in recursive including through the [launch file of the turtlebot_gazebo package](https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/master/turtlebot3_gazebo/launch/turtlebot3_world.launch).
-
-The proposed model looks like this:
-
-```
+```text
 turtlebot_gazebo:
   fromFile: "turtlebot3_gazebo/launch/turtlebot3_world.launch.py"
   nodes:
     gazebo:
       from: "gazebo.gazebo"
-    robot_state_publisher:
-      from: "robot_state_publisher.robot_state_publisher"
-      interfaces:
-        - joint_states: sub-> "robot_state_publisher::joint_states"
-        - tf: pub-> "robot_state_publisher::tf"
-        - tf_static: pub-> "robot_state_publisher::tf_static"
-    turtlebot3_joint_state:
-      from: "turtlebot3_joint_state.turtlebot3_joint_state"
-      interfaces:
-        - joint_states: pub-> "turtlebot3_joint_state::joint_states"
     turtlebot3_diff_drive:
       from: "turtlebot3_diff_drive.turtlebot3_diff_drive"
       interfaces:
-        - cmd_vel: sub->"turtlebot3_diff_drive::cmd_vel"
+        - cmd_vel_diff: sub->"turtlebot3_diff_drive::cmd_vel"
         - tf: pub->"turtlebot3_diff_drive::tf"
-        - odom: pub->"turtlebot3_diff_drive::odom"
-    turtlebot3_imu:
-      from: "turtlebot3_imu.turtlebot3_imu"
-      interfaces:
-        - imu: pub-> "turtlebot3_imu::imu"
-    camera_driver:
-      from: "camera_driver.camera_driver"
-      interfaces:
-        - camera_info: pub-> "camera_driver::camera/camera_info"
-        - image_raw: pub-> "camera_driver::camera/image_raw"
-        - set_camera_info: ss-> "camera_driver::set_camera_info"
+        - odom_diff: pub->"turtlebot3_diff_drive::odom"
     turtlebot3_laserscan:
       from: "turtlebot3_laserscan.turtlebot3_laserscan"
       interfaces:
-        - scan: pub-> "turtlebot3_laserscan::scan"
+        - scan_turtlebot: pub-> "turtlebot3_laserscan::scan"
+    # ... robot_state_publisher, turtlebot3_joint_state, turtlebot3_imu and camera_driver
 ```
 
-Where the "fromFile" attribute points to the launch file that must be started to run the (sub-)system.
+(The listing is shortened.) `fromFile` is the launch file that starts the whole system. The nodes and interfaces are the ones that the author chose to expose for higher-level systems. How much to describe is the choice of the developer: a file with only the first two lines is valid, but the more is described, the better for documentation and composition. See [Existing systems with a launch file](LearnRosSystemModels2.md#existing-systems-with-a-launch-file).
 
-Then, we added the most relevant nodes and interfaces that we wanted to expose for the integration with higher-level components. In this case robot_state_publisher, turtlebot3_joint_state, turtlebot3_diff_drive, turtlebot3_imu, camera_driver, turtlebot3_laserscan. The granularity of the description and its completeness is a decision that the developer can take. For the RosTooling a file containing only the first two lines:
+## 2. Compose the simulation with a keyboard node
 
-```
-turtlebot_gazebo:
-  fromFile: "turtlebot3_gazebo/launch/turtlebot3_world.launch.py"
-```
+The catalogue also has a keyboard node, in `common/teleop_twist_keyboard.ros2`. It takes the keys and publishes velocity commands, `geometry_msgs/msg/Twist`. Create a new system file, `turtlebot_with_teleop.rossystem`, with the turtlebot as a subsystem and the keyboard node:
 
-is fully valid. However, for documentation and composability reasons, it is highly recommended the addition of, at least, the most prominent components and their interfaces. All of this information will be taken into account to generate the README.md file.
-
-### Compose the turtlebot simulation with the teleop keyboard node [![](images/Ros2_logo.png)]
-
-As a traditional and basic case in mobile base in robotics, we can combine the simulator with the teleop node. 
-
-The catalog repository includes also a keyboard teleop component, it can be found under **RosModelsCatalog/common/teleop_twist_keyboard.ros2**.
-
-It basically contains one node that takes the commands from the keyboard and transforms them into velocity commands using the common ROS message **geometry_msgs/Twist**.
-
-The new system can be easily designed by creating a [new .rossystem file](LearnRosSystemModels.md) and adding the two modules we want to compose. First the turtlebot_gazebo as subsystem:
-
-```
+<!-- check: group=mb1 file=turtlebot_with_teleop.rossystem -->
+```text
 turtlebot_with_teleop:
   subSystems:
-    turtlebot_gazebo
-```
-
-And secondly, the teleop keyboard node:
-```
-turtlebot_with_teleop:
-  subSystems:
-    turtlebot_gazebo
+    "turtlebot_gazebo"
   nodes:
-    teleop_key:
+    "teleop_key":
       from: "teleop_twist_keyboard.teleop_twist_keyboard"
 ```
 
-![alt text](images/02_mobile_base_b.gif)
+Generate the package with **Generate ROS 2 Package**. It is written to `src-gen/turtlebot_with_teleop/`. Its README has the instructions to install the dependencies and start the system, and its launch file includes the launch file of the simulation next to the keyboard node. The simulation needs the model of the robot to be set:
 
-The file will be validated by the RosSystem compiler and the **turtlebot_with_teleop** package created under the src-gen folder.
-
-The autogenerated README file explains how to install the dependencies and start the system. 
-![](images/Attention.png) One instruction, particularly for the turtlebot is missed, the robot name has to be set as an environment variable. This means, that before you call the launch command you have to export the following variable:
-
-```
+```bash
 export TURTLEBOT3_MODEL=waffle_pi
 ```
 
-![alt text](images/03_mobile_base_b.gif)
+A nice property of models during the design is how easy it is to try other components. The catalogue has another keyboard node, the one of the turtlebot, in `robots/turtlebot3/turtlebot3_teleop.ros2`. Change one line:
 
-Another nice feature of the RosTooling at this stage of the development, during the design phase, is that makes very easy the testing of alternative components. For example, we can use another implementation of a teleop keyboard node. The catalog contains the description of the package turtlebot_keyboard under **RosModelsCatalog/robots/turtlebot3/turtlebot3_teleop.ros2**.
-
-By the modification of one line on the model:
-
-```
+<!-- check: group=mb2 file=turtlebot_with_teleop.rossystem -->
+```text
 turtlebot_with_teleop:
   subSystems:
-    turtlebot_gazebo
+    "turtlebot_gazebo"
   nodes:
-    teleop:
+    "teleop":
       from: "turtlebot3_teleop.teleop_keyboard"
 ```
 
-![alt text](images/04_mobile_base_b.gif)
+After generating again, the package depends on the other implementation and starts it with the simulation.
 
-The new package will be fully auto-generated. Contain the dependency on the new implementation of the teleop node and launch it together with the simulation.
+## 3. Add the cartographer node
 
-### Compose the turtlebot simulation with the cartographer node [![](images/Ros2_logo.png)]
+The system can grow in the same way. The catalogue has a system for cartographer with the configuration for the turtlebot, in `robots/turtlebot3/cartographer.rossystem`. Use it as another subsystem:
 
-Similarly to the previous example, the system can be made more complex. An example of this is to add the [cartographer node](https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html) to the system.
-
-The description of the cartographer node is available as part of the catalog, under the folder **navigation**. Also, for the specific case of the turtlebot there is an available configuration, we can basically reuse it as a subsystem with the following model:
-
-```
+<!-- check: group=mb3 file=turtlebot_with_teleop_and_cartographer.rossystem -->
+```text
 turtlebot_with_teleop_and_cartographer:
   subSystems:
-    turtlebot_gazebo
-    cartographer
+    "turtlebot_gazebo"
+    "cartographer"
   nodes:
-    teleop:
+    "teleop":
       from: "turtlebot3_teleop.teleop_keyboard"
 ```
 
-![alt text](images/05_mobile_base_b.gif)
+Generate the package, follow its README, and start the system. The robot moves with the keys, and in RViz you can watch the map. To save it, use the standard command:
 
-
-Then basically, you have to follow the information in the README file. By launching the system you will be able to move the robot using the teleop and in RVIZ visualise the map. To save it, [the common ROS command can be called](https://ros2-industrial-workshop.readthedocs.io/en/latest/_source/navigation/ROS2-Cartographer.html):
-
-```
+```bash
 ros2 run nav2_map_server map_saver_cli -f my_map
 ```
 
-### (Optional) Extra notes, and consideration
+## 4. Make the connections explicit
 
-By following the previous examples you show that the RosTooling intend to support the ROS developers in the way they usually work. However, at the same time, we aim to promote the follow-up of software quality processes aided by modeling techniques.
+In the systems above nothing says which ports are connected. This works because ROS connects a publisher and a subscriber that have the same topic name and type at run time. But the designer does not see it, and the model does not check it. If you open the system in RosTooling Studio you see only the subsystems and the node, without wires:
 
-In the previous system, we have not needed an explicit definition of the ports to be connected. However, it has worked because ROS allows it, i.e. whenever a subscriber and a publisher have the same name and type in runtime they will connect automatically. Nevertheless, this is not seen during the design time, and therefore it is not validated by the designer. If we visualize the model we created, we will see the following diagram:
-
-![alt text](images/turtlebot_with_teleop_and_cartographer_diagram1.jpg)
-
-As documentation this image is incomplete, also to communicate or give the complete picture of the system to third parties or people without technical knowledge, this is insufficient. Therefore it is convenient to be as explicit as possible, for a better system design, a clean validation process and an understanding of the system before deployment, and to have better-documented software.
-
-For example in this case it would be:
+```{image} images/tut_mobilebase_implicit.png
+:alt: The system without explicit connections
+:width: 100%
 ```
+
+This is incomplete as documentation, and for people who do not know ROS. Be as explicit as is reasonable. The subsystems have labels for their interfaces, `cmd_vel_diff`, `scan_turtlebot` for the laser scan and `odom_diff` for the odometry on the side of the robot, and `scan_cart` and `odom_cart` on the side of cartographer. Expose the interface of the keyboard node and connect them:
+
+<!-- check: group=mb4 file=turtlebot_with_teleop_and_cartographer.rossystem -->
+```text
 turtlebot_with_teleop_and_cartographer:
   subSystems:
-    turtlebot_gazebo
-    cartographer
+    "turtlebot_gazebo"
+    "cartographer"
   nodes:
-    teleop:
+    "teleop":
       from: "turtlebot3_teleop.teleop_keyboard"
-      interfaces: 
-       - cmd_vel: pub-> "teleop_keyboard::cmd_vel"
+      interfaces:
+        - "cmd_vel": pub-> "teleop_keyboard::cmd_vel"
   connections:
-    - [cmd_vel, cmd_vel_diff]
-    - [scan_turtlebot, scan_cart]
-    - [odom_diff, odom_cart]
+    - ["cmd_vel", "cmd_vel_diff"]
+    - ["scan_turtlebot", "scan_cart"]
+    - ["odom_diff", "odom_cart"]
 ```
 
-The corresponding visualization would be in that case:
+Now the validator checks that the ports exist and have the same type, the diagram shows the wires, and the model documents the system for others:
 
-![alt text](images/turtlebot_with_teleop_and_cartographer_diagram2.jpg)
+```{image} images/tut_mobilebase_explicit.png
+:alt: The system with explicit connections
+:width: 100%
+```

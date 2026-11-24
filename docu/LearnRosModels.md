@@ -1,74 +1,100 @@
-# Review models and the use of the textual editors for Ros nodes
+# Review package models
 
-To complete this tutorial the project "de.fraunhofer.ipa.ros.communication.objects" must be imported. See instructions under [setup](Environment_setup.md). If the automatic clone doesn't work for you, please clone the repository [RosCommonObjects](https://github.com/ipa320/RosCommonObjects) manually and import it to your Eclipse workspace.
+In this tutorial you write a small package model, `.ros2`, and meet the help that the editor gives: the naming rules, the error for a type that does not exist, completion, and what happens with a grammar error. It takes about 15 minutes.
 
-The first step is to create a new Project to contain the examples. This can be done by pressing the icon "Add new ROS Project".
+**What you need:** the [VS Code extension](../vscode/overview.md). The message types come from the [catalogue](../vscode/catalogue.md), which the extension downloads when it starts. If you use Eclipse, the same models and messages apply; the tabs below show the differences.
 
-![alt text](images/create_new_RosProject.png)
+## 1. Create the model file
 
-If the button doesn't work you can also create it manually using the Eclipse menu File -> New -> Other.. and searching for "Ros Model Project".
+::::{tab-set}
+:::{tab-item} VS Code
+Open an empty folder in VS Code (**File → Open Folder**), create a file with **File → New File** and name it `my_first_package.ros2`. The extension recognises the extension `.ros2` and switches on the editor features of the [package language](RosModelDescription.md). Right-click the file and choose **Open in RosTooling Visual Studio** whenever you want to see it as a diagram.
+:::
+:::{tab-item} Eclipse
+Create a new project with the icon **Add new ROS Project**, or with **File → New → Other…** and **Ros Model Project**. The project refers to `de.fraunhofer.ipa.ros.communication.objects` and has a folder `rosnodes` with an empty `.ros2` file, which shows an error until you fill it. See [Eclipse setup](Environment_setup.md).
 
-![alt text](images/first_project_tutorial.gif)
+![](images/create_new_RosProject.png)
+:::
+::::
 
-By default, a new project with a reference to the content of the "de.fraunhofer.ipa.ros.communication.objects" will be created. This new project contains a folder called "rosnodes" to hold the nodes description and a file with the extension .ros2 which will have an error because it is empty.
+## 2. The naming rules
 
-You can open the file and copy the following content:
+Paste this into the file:
 
-```
+<!-- check: group=names file=my_first_package.ros2 expect="Capital letters are not allowed" -->
+```text
 my_Component:
-  artifacts: 
+  artifacts:
     Component:
-     node: Test
+      node: Test
 ```
 
-This model will report an error and two issues. By moving the mouse to the error icon, the ROS model editor will point out the issue, in this case, "The name of a package has to follow the ROS naming conventions: Capital letters are not allowed". The ROS models compiler includes the ROS naming conventions based on the [REP 144](https://ros.org/reps/rep-0144.html), where it is established that a name must "only consist of lowercase alphanumerics and _ separators and start with an alphabetic character."
+The editor underlines the first line as an error: "The name of a package has to follow the ROS naming conventions: Capital letters are not allowed". Hover over the underline to read it. The rules come from [REP 144](https://ros.org/reps/rep-0144.html): a name consists of lowercase letters, digits and underscores, and starts with a letter. For the artifact `Component` and the node `Test` the same rule is only a warning: "The name of a artifact should follow the ROS naming conventions: Capital letters are not recommended".
 
-![alt text](images/01_learn_rosmodels.gif )
+Fix the names, `my_component`, `component` and `test`, and the problems are gone.
 
-Similar rules, but not mandatory, apply to the names of the artifacts and the nodes. Both issues are shown as warnings by the RosTooling.
+## 3. A type that does not exist
 
-The next case to check is the definition of a non-existent message type as a communication object for an interface. For example:
+Replace the content with a node that has a publisher. The type is wrong on purpose:
 
-```
+<!-- check: group=type file=my_first_package.ros2 expect="Couldn't resolve reference to TopicSpec" -->
+```text
 my_component:
-  artifacts: 
+  artifacts:
     component:
-     node: test
-     publishers:
-       string_pub:
-         type: "my_msgs_package/msg/String"
+      node: test
+      publishers:
+        string_pub:
+          type: "my_msgs_package/msg/String"
 ```
 
-By pasting the previous text to a .ros2 file the editor will point the following error: "Couldn't resolve reference to TopicSpec 'my_msgs_package/msg/String'." 
+The error is "Couldn't resolve reference to TopicSpec 'my_msgs_package/msg/String'": the type is not defined anywhere that RosTooling can see. The message also names two ways to fix it, to add the project that defines the type or to generate a `.ros` model for it, see [Communication objects](NewCommunicationObjects.md).
 
-This means the type "my_msgs_package/msg/String" is not defined. You can easily use an existing type by removing the incorrect value a pressing Ctrl + Space bar. Then you can select for example "std_msgs/msg/String" and the error will disappear.
+To use an existing type, delete the text between the quotes and press `Ctrl+Space`. The editor lists the types of the catalogue. Choose `std_msgs/msg/String` and the error disappears. To see where a type is defined, put the cursor on it and use **Go to Definition** (`F12`, in Eclipse `F2`).
 
-![alt text](images/02_learn_rosmodels.gif)
+## 4. A grammar error
 
-To review the definition of the referenced object, you should press F2 while you have the mouse pointer pointing to the object.
+The last kind of error is a mistake in the grammar. Add a parameter without a type:
 
-![alt text](images/03_learn_rosmodels.gif)
-
-Last, let's check the output when a grammar error is introduced. For example by creating a parameter without a defined type. If you copy the following text to the .ros2 file:
-
-```
+<!-- check: group=grammar file=my_first_package.ros2 expect="must be set" -->
+```text
 my_component:
-  artifacts: 
+  artifacts:
     component:
-     node: test
-     publishers:
-       string_pub:
-         type: "std_msgs/msg/String"
-     parameters:
-       my_bool:
+      node: test
+      publishers:
+        string_pub:
+          type: "std_msgs/msg/String"
+      parameters:
+        my_bool:
 ```
 
-In this case, the helper will say "The required feature 'type' of 'ros.impl.ParameterImpl@37c1c0b8{platform:/resource/my_first_project/rosnodes/my_first_project.ros2#//@artifact.0/@node/@parameter.0}' must be set". 
+This time the messages are more technical: the parser reports "no viable alternative at input" and says that "The required feature 'type' of 'ParameterImpl' must be set". They mean that a parameter needs a type. Add it under `my_bool` and use `Ctrl+Space` to see the choices:
 
-To solve it, add a new element under my_bool to describe the type. The autocomplete function (Ctrl + Space bar) can help you to use the correct grammar.
+<!-- check: group=final file=my_first_package.ros2 -->
+```text
+my_component:
+  artifacts:
+    component:
+      node: test
+      publishers:
+        string_pub:
+          type: "std_msgs/msg/String"
+      parameters:
+        my_bool:
+          type: Boolean
+          default: true
+```
 
-![alt text](images/04_learn_rosmodels.gif)
+## 5. See it as a diagram
 
-Now that you understand how the textual editor and the model's validator work, you can check one of the extended examples. The project "de.fraunhofer.ipa.ros.communication.objects" under "BasicSpecs/Components" contains some examples. We strongly recommend taking a look at "ros_component_template.ros2".
+Right-click the file and choose **Open in RosTooling Visual Studio**. The Studio shows the package as a form: the node `test` with its publisher `string_pub` and its parameter `my_bool`. Everything you change there is written to the text.
 
-Also, [clone and check the Catalog](Environment_setup.md#import-the-catalog) with many real examples of ROS 2 components.
+```{image} images/tut_component.png
+:alt: The Component view of the finished model
+:width: 100%
+```
+
+## Next
+
+Now you know how the editor and the validator work. Look at larger models: [Package language](RosModelDescription.md) describes all features, and the [catalogue](../vscode/catalogue.md) has many real ROS 2 nodes. The next tutorial combines nodes in a [system](LearnRosSystemModels.md).

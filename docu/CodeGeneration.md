@@ -70,7 +70,7 @@ def generate_launch_description():
 
 ### Connections
 
-ROS connects publishers and subscribers by topic name. A connection of the model is therefore written as a remapping: the receiving side is remapped to the name of the sending side. In the example, `chatter_in` of the listener is remapped to `chatter`, the interface label of the talker. A connection does not rename anything on the sending side, so choose the labels of the senders to be the topic names you want.
+ROS connects publishers and subscribers by topic name. A connection of the model is therefore written as a remapping: the receiving side is remapped to the name of the sending side. In the example, `chatter_in` of the listener is remapped to `chatter`, the interface label of the talker. The label of an interface is the topic name that the connection uses: when the label is not the same as the interface name in the package model, the sender is remapped to its label as well, as in the example in the [publisher and subscriber tutorial](Example_PubSub.md). Choose the labels of the senders to be the topic names you want.
 
 ### Parameters
 

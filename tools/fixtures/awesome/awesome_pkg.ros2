@@ -1,0 +1,22 @@
+awesome_pkg:
+  artifacts:
+    awesome:
+      node: awesome_node
+      publishers:
+        awesome_pub:
+          type: "std_msgs/msg/String"
+        hello_world_pub:
+          type: "std_msgs/msg/Int32"
+      parameters:
+        awesome_array_param:
+          type: Array [String]
+        awesome_bool_param:
+          type: Boolean
+        awesome_double_param:
+          type: Double
+        awesome_integer_param:
+          type: Integer
+        awesome_string_param:
+          type: String
+        awesome_struct_param:
+          type: Struct [first Integer, second Boolean]
