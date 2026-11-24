@@ -50,6 +50,25 @@ counter:
 
 A type is referred to from a package model as `<package>/msg/<Name>`, `<package>/srv/<Name>` or `<package>/action/<Name>`.
 
+### Arrays
+
+A field can be an array. `float32[]` has any length, `float64[9]` has exactly 9 elements, and `int32[<=5]` has at most 5. This works for the primitive types and for references to other messages, and arrays cannot be nested.
+
+:::{note}
+Arrays with a fixed size or an upper bound need a RosTooling version that is newer than the current release. The server of the current release only accepts arrays of any length, `T[]`.
+:::
+
+<!-- check: group=arrays file=array_msgs.ros skip="sized arrays are not in the released server" -->
+```text
+array_msgs:
+  msgs:
+    Samples
+      message
+        float64[9] covariance
+        int32[<=5] ids
+        float32[] values
+```
+
 ## Autogeneration tools  [![](images/Ros2_logo.png)]
 
 
